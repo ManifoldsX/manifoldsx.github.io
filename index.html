@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ManifoldsX — Engineering Simulation Platform</title>
-<meta name="description" content="A modern browser-based engineering simulation platform for constrained mechanisms, robotics, contact-rich dynamics, and flexible multibody systems.">
+<title>ManifoldsX — Applied Research in Multibody Dynamics</title>
+<meta name="description" content="An independent applied-research project developing numerical methods and browser-based prototypes for constrained multibody dynamics, robotics, contact, and flexible mechanical systems.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
@@ -31,6 +31,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:cen
 /* HERO */
 .hero{min-height:auto;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:120px 24px 70px;position:relative}
 .hero::before{content:'';position:absolute;top:-300px;left:50%;transform:translateX(-50%);width:1200px;height:1200px;background:radial-gradient(ellipse,var(--accent-g) 0%,transparent 60%);pointer-events:none}
+.hero-eyebrow{position:relative;font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);margin-bottom:18px}
 .hero h1{font-size:clamp(36px,5.5vw,72px);font-weight:800;letter-spacing:-.045em;line-height:1.03;max-width:920px;margin-bottom:28px}
 .hero h1 em{font-style:normal;background:linear-gradient(135deg,#4a8af5,#a78bfa);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
 .hero-p{font-size:clamp(16px,1.8vw,20px);color:var(--dim);max-width:670px;line-height:1.55;margin-bottom:48px;font-weight:300}
@@ -95,8 +96,8 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:cen
   .hero-actions{flex-direction:column;align-items:center}
 }
 @keyframes fadeUp{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
-.hero h1,.hero-p,.hero-actions{animation:fadeUp .7s ease both}
-.hero-p{animation-delay:.12s}.hero-actions{animation-delay:.24s}
+.hero-eyebrow,.hero h1,.hero-p,.hero-actions{animation:fadeUp .7s ease both}
+.hero h1{animation-delay:.06s}.hero-p{animation-delay:.12s}.hero-actions{animation-delay:.24s}
 </style>
 </head>
 <body>
@@ -104,23 +105,24 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:cen
 <nav>
   <div class="brand">Manifolds<span>X</span></div>
   <div class="nav-r">
-    <a href="#applications">Applications</a>
-    <a href="#technology">Technology</a>
-    <a href="#demos">Demos</a>
-    <a href="#contact" class="nav-cta">Contact</a>
+    <a href="#research">Research Focus</a>
+    <a href="#technology">Methods</a>
+    <a href="#demos">Studies</a>
+    <a href="#contact" class="nav-cta">Research Contact</a>
   </div>
 </nav>
 
 <!-- HERO -->
 <section class="hero">
-  <h1>High-fidelity simulation for <em>complex mechanical systems</em></h1>
+  <div class="hero-eyebrow">Independent Applied Research · Multibody Dynamics</div>
+  <h1>Researching robust simulation for <em>complex mechanical systems</em></h1>
   <p class="hero-p">
-    ManifoldsX is a modern browser-based engineering simulation platform for constrained mechanisms,
-    robotics, contact-rich dynamics, and flexible multibody systems.
+    ManifoldsX is an independent applied-research project exploring numerical methods and browser-based
+    workflows for constrained mechanisms, robotics, contact-rich dynamics, and flexible multibody systems.
   </p>
   <div class="hero-actions">
-    <a href="mailto:manifoldsx.eng@gmail.com" class="btn-primary">Request Early Access</a>
-    <a href="#demos" class="btn-ghost">Watch Demos ↓</a>
+    <a href="#demos" class="btn-primary">View Experimental Demos</a>
+    <a href="#research" class="btn-ghost">Research Focus ↓</a>
   </div>
 
   <div class="hero-video-wrap">
@@ -130,34 +132,34 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:cen
   </div>
 </section>
 
-<!-- APPLICATIONS -->
-<section class="domains" id="applications">
-  <div class="domains-tag">Applications</div>
-  <h2>Built for real engineering problems</h2>
+<!-- RESEARCH FOCUS -->
+<section class="domains" id="research">
+  <div class="domains-tag">Research Focus</div>
+  <h2>Questions driving the work</h2>
   <p class="domains-p">
-    From parallel robots to industrial mechanisms, ManifoldsX helps engineers model, solve,
-    and visualize constrained mechanical systems with a modern workflow.
+    The project investigates practical numerical methods that make complex mechanism simulation more
+    transparent, inspectable, and reproducible.
   </p>
   <div class="domain-grid">
     <div class="domain-card">
+      <div class="domain-icon">⛓️</div>
+      <h3>Constrained Multibody Dynamics</h3>
+      <p>Implicit, constraint-based formulations for closed-loop mechanisms, long kinematic chains, and stiff mechanical systems.</p>
+    </div>
+    <div class="domain-card">
       <div class="domain-icon">🤖</div>
-      <h3>Robotics & Automation</h3>
-      <p>Model robotic arms, parallel manipulators, and linkage mechanisms with robust constraint-based dynamics.</p>
+      <h3>Parallel Mechanisms</h3>
+      <p>Modeling and actuation studies for Stewart platforms, hexapods, and multi-stage robotic mechanisms.</p>
     </div>
     <div class="domain-card">
-      <div class="domain-icon">🎮</div>
-      <h3>Motion Platforms</h3>
-      <p>Design and validate Stewart platforms, hexapods, and multi-stage motion systems with driven actuator inputs.</p>
+      <div class="domain-icon">💥</div>
+      <h3>Contact & Impact</h3>
+      <p>Contact models and numerical strategies for stable impact, compliant contact, and contact-rich motion studies.</p>
     </div>
     <div class="domain-card">
-      <div class="domain-icon">⚙️</div>
-      <h3>Industrial Machinery</h3>
-      <p>Analyze mechanisms, linkages, cams, gears, and dynamic loads in complex mechanical assemblies.</p>
-    </div>
-    <div class="domain-card">
-      <div class="domain-icon">🔬</div>
-      <h3>Research & Education</h3>
-      <p>Use an analytical physics pipeline for constrained dynamics, sensitivity studies, optimization, and advanced simulation research.</p>
+      <div class="domain-icon">∇</div>
+      <h3>Sensitivity & Optimization</h3>
+      <p>Analytical model structure intended to support parameter studies, calibration, and future gradient-based workflows.</p>
     </div>
   </div>
 </section>
@@ -165,32 +167,32 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:cen
 <!-- TECHNOLOGY -->
 <section class="features" id="technology">
   <div class="feat-inner">
-    <div class="domains-tag">Technology</div>
-    <h2>What powers ManifoldsX</h2>
+    <div class="domains-tag">Methods &amp; Prototypes</div>
+    <h2>Current technical direction</h2>
     <div class="feat-grid">
       <div class="feat">
         <div class="feat-dot"></div>
-        <div><h3>Implicit DAE Solver</h3><p>INDEX-3 constrained dynamics for stiff, high-speed mechanical systems.</p></div>
+        <div><h3>Implicit INDEX-3 DAE Formulation</h3><p>Position-level constraint formulations and Newton iterations for stiff, closed-loop mechanical systems.</p></div>
       </div>
       <div class="feat">
         <div class="feat-dot"></div>
-        <div><h3>Differentiation-Ready Physics</h3><p>An analytical solver architecture designed for optimization, sensitivity analysis, and future gradient-based workflows.</p></div>
+        <div><h3>Sensitivity-Oriented Architecture</h3><p>Analytical kinematics and mechanics organized to support repeatable parameter studies and future derivative-based research.</p></div>
       </div>
       <div class="feat">
         <div class="feat-dot"></div>
-        <div><h3>Library of Joints & Motions</h3><p>Reusable joints, prescribed motions, forces, contacts, and modeling elements for building mechanism simulations.</p></div>
+        <div><h3>Mechanism Primitives</h3><p>Joints, prescribed motions, forces, compliant elements, and prototype contact models for controlled mechanism experiments.</p></div>
       </div>
       <div class="feat">
         <div class="feat-dot"></div>
-        <div><h3>Browser-Based Workflow</h3><p>Build, inspect, solve, animate, and record models using a modern 3D interface designed for engineering workflows.</p></div>
+        <div><h3>Browser-Based Research Interface</h3><p>A visual environment for building test models, inspecting states, running experiments, and reviewing solver output.</p></div>
       </div>
       <div class="feat">
         <div class="feat-dot"></div>
-        <div><h3>Contact-Rich Dynamics</h3><p>Analytical contact and impact formulations for contact-rich motion studies.</p></div>
+        <div><h3>Contact Numerics</h3><p>Ongoing work on contact detection, compliant impact, and future friction formulations for contact-rich motion studies.</p></div>
       </div>
       <div class="feat">
         <div class="feat-dot"></div>
-        <div><h3>C++ Solver Core</h3><p>A C++ solver core written from scratch for implicit stepping and engineering-scale constrained dynamics models.</p></div>
+        <div><h3>C++ Experimental Core</h3><p>A C++17 solver core supporting controlled benchmarks, numerical diagnostics, and constrained-dynamics experiments.</p></div>
       </div>
     </div>
   </div>
@@ -199,17 +201,17 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:cen
 <!-- DEMOS -->
 <section class="demos" id="demos">
   <div class="demos-inner">
-    <div class="domains-tag">In Action</div>
-    <h2>Demos</h2>
-    <p class="domains-p">Solver accuracy, robustness, and speed in action.</p>
+    <div class="domains-tag">Experimental Studies</div>
+    <h2>Mechanism and solver studies</h2>
+    <p class="domains-p">Selected model studies from the current research prototype. These demonstrations are illustrative, not validation against a physical test rig.</p>
     <div class="demo-grid">
       <div class="demo">
         <video class="demo-video" controls preload="metadata">
           <source src="Double_Stewart.mp4" type="video/mp4">
         </video>
         <div class="demo-info">
-          <h3>Two-Stage Stewart Platform</h3>
-          <p>Parallel mechanism with multiple driven actuators and coordinated kinematic constraints.</p>
+          <h3>Two-Stage Stewart Platform Study</h3>
+          <p>A coordinated parallel mechanism used to study multiple driven constraints and actuator trajectories.</p>
         </div>
       </div>
       <div class="demo">
@@ -217,8 +219,8 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:cen
           <source src="100Links.mp4" type="video/mp4">
         </video>
         <div class="demo-info">
-          <h3>100-Link Chaotic Pendulum</h3>
-          <p>High-DOF constrained dynamics showing deterministic, reproducible chaotic motion from solver-generated output.</p>
+          <h3>100-Link Constraint Propagation Study</h3>
+          <p>A high-DOF chain used to examine constraint propagation, stability, and repeatable nonlinear motion.</p>
         </div>
       </div>
       <div class="demo">
@@ -226,8 +228,8 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:cen
           <source src="Stewart.mp4" type="video/mp4">
         </video>
         <div class="demo-info">
-          <h3>Single-Stage Stewart Platform</h3>
-          <p>Single-stage Stewart platform with 6 actuated prismatic legs and spherical joints, simulated with tightly controlled numerical residuals.</p>
+          <h3>Single-Stage Stewart Platform Benchmark</h3>
+          <p>A six-leg parallel mechanism used to examine closed-loop constraint behavior under prescribed actuator motion.</p>
         </div>
       </div>
     </div>
@@ -236,15 +238,15 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:cen
 
 <!-- CTA -->
 <section class="cta-section" id="contact">
-  <h2>Ready to simulate?</h2>
+  <h2>Research contact</h2>
   <p>
-    We're looking for early design partners and pilot projects. If you work with mechanisms,
-    robotics, contact-rich systems, or motion platforms, let's talk.
+    ManifoldsX is an independent technical research effort. Questions, benchmark ideas, feedback,
+    and research discussions are welcome.
   </p>
   <a href="mailto:manifoldsx.eng@gmail.com" class="cta-email">✉ manifoldsx.eng@gmail.com</a>
 </section>
 
-<footer class="footer">© 2026 ManifoldsX</footer>
+<footer class="footer">Independent Applied Research in Multibody Dynamics · © 2026 ManifoldsX</footer>
 
 </body>
 </html>
