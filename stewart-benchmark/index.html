@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Double Stewart Benchmark · ManifoldsX</title>
+<meta name="description" content="A reproducible benchmark: a two-stage Stewart platform driven by its leg lengths, with ManifoldsX and a MuJoCo model scored against forward kinematics. Method, settings, cost, limits and the full package.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --bg:#04070c;--surface:#090e18;--surface-2:#0f1520;--stroke:rgba(140,165,215,.08);
+  --stroke-h:rgba(140,165,215,.16);--text:#dce4f0;--dim:#8396b5;--muted:#5e7192;
+  --accent:#4a8af5;--accent-s:rgba(74,138,245,.1);
+  --mx:#4a8af5;--mj:#d9733a;--warn:#e3a63b;
+  --sans:'Outfit',system-ui,-apple-system,'Segoe UI',sans-serif;--mono:'JetBrains Mono',ui-monospace,Menlo,Consolas,monospace;
+  color-scheme:dark;
+}
+html{scroll-behavior:smooth}
+body{font-family:var(--sans);background:var(--bg);color:var(--text);line-height:1.6;-webkit-font-smoothing:antialiased}
+a{color:var(--accent)}
+nav{position:sticky;top:0;z-index:100;display:flex;align-items:center;justify-content:space-between;gap:16px;padding:14px max(16px,4vw);background:rgba(4,7,12,.92);backdrop-filter:blur(24px);border-bottom:1px solid var(--stroke)}
+.brand{font-size:21px;font-weight:700;letter-spacing:-.03em;color:#fff;text-decoration:none}
+.brand span{color:var(--accent);font-weight:400}
+.nav-r{display:flex;align-items:center;gap:24px}
+.nav-r a{color:var(--dim);text-decoration:none;font-size:13px;font-weight:500}
+.nav-r a:hover{color:#fff}
+.nav-cta{padding:8px 18px;border-radius:8px;background:var(--accent);color:#fff!important;font-weight:600}
+.wrap{max-width:1040px;margin:0 auto;padding:0 max(16px,4vw)}
+section{padding:64px 0;border-top:1px solid var(--stroke)}
+section:first-of-type{border-top:0}
+.tag{font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);margin-bottom:12px}
+h1{font-size:clamp(32px,5vw,56px);font-weight:800;letter-spacing:-.04em;line-height:1.05;max-width:880px;margin-bottom:22px;text-wrap:balance}
+h2{font-size:clamp(24px,3.4vw,34px);font-weight:700;letter-spacing:-.02em;line-height:1.15;margin-bottom:14px;text-wrap:balance}
+h3{font-size:16px;font-weight:600;margin-bottom:6px}
+p{max-width:68ch}
+.lede{font-size:clamp(16px,1.7vw,19px);color:var(--dim);font-weight:300;line-height:1.55}
+.dim{color:var(--dim)}
+.small{font-size:13.5px;color:var(--dim)}
+.hero{padding:72px 0 48px}
+.hero video{width:100%;max-width:100%;aspect-ratio:16/9;display:block;border-radius:14px;border:1px solid var(--stroke);background:#000;margin-top:36px}
+
+.figs{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin-top:28px}
+.fig{background:var(--surface);border:1px solid var(--stroke);border-radius:14px;padding:20px 20px 18px;display:grid;gap:4px;min-width:0;align-content:start}
+.fig.mx{border-color:rgba(74,138,245,.35)}
+.fig .who{font-size:12px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--dim);display:flex;gap:8px;align-items:center}
+.fig .who i{width:9px;height:9px;border-radius:50%;display:inline-block}
+.fig .big{font-family:var(--mono);font-size:clamp(26px,3.4vw,34px);font-weight:500;letter-spacing:-.02em;font-variant-numeric:tabular-nums}
+.fig .big small{font-size:15px;color:var(--dim);margin-left:4px}
+.fig .sub{font-size:13.5px;color:var(--dim)}
+.note{margin-top:14px}
+
+figure{background:var(--surface);border:1px solid var(--stroke);border-radius:14px;padding:18px 16px 10px;margin-top:24px;position:relative}
+#chart{display:block;width:100%;height:auto;min-width:640px}
+.chart-scroll{overflow-x:auto}
+.legend svg{flex:none}
+.legend{display:flex;flex-wrap:wrap;gap:6px 18px;font-size:13px;color:var(--dim);margin:2px 4px 10px}
+.legend span{display:inline-flex;align-items:center;gap:7px}
+.axis text{fill:var(--dim);font:12px var(--mono)}
+.grid line{stroke:rgba(140,165,215,.1);stroke-width:1}
+.axl{fill:var(--dim);font:13px var(--sans)}
+.lab{font:12.5px var(--sans);fill:var(--text)}
+.tip{position:absolute;pointer-events:none;background:#e9eef6;color:#08101c;border-radius:6px;padding:7px 10px;font:12.5px/1.45 var(--mono);white-space:nowrap;z-index:3}
+figcaption{font-size:13px;color:var(--dim);margin:8px 4px 4px;max-width:none}
+
+.table-wrap{overflow-x:auto;margin-top:22px;border:1px solid var(--stroke);border-radius:14px}
+table{width:100%;border-collapse:collapse;min-width:680px;font-variant-numeric:tabular-nums}
+th,td{padding:11px 14px;text-align:right;border-bottom:1px solid var(--stroke);white-space:nowrap}
+th:first-child,td:first-child{text-align:left;white-space:normal;min-width:230px}
+thead th{font-size:11.5px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--dim);background:var(--surface)}
+tbody td{font-family:var(--mono);font-size:13.5px}
+tbody td:first-child{font-family:var(--sans);font-size:14px}
+tbody tr.mxrow td{color:#fff}
+tbody tr.mxrow td:first-child{box-shadow:inset 3px 0 0 var(--mx)}
+tbody tr:last-child td{border-bottom:0}
+
+.cols{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:28px 40px;margin-top:22px}
+dl{display:grid;gap:14px}
+dt{font-weight:600;font-size:14.5px}
+dd{color:var(--dim);font-size:14.5px;max-width:62ch}
+ul.limits{list-style:none;display:grid;gap:12px;margin-top:18px}
+ul.limits li{padding-left:18px;position:relative;color:var(--dim);max-width:72ch}
+ul.limits li::before{content:"";position:absolute;left:0;top:.62em;width:7px;height:7px;border-radius:50%;background:var(--warn)}
+ul.limits b{color:var(--text);font-weight:600}
+.correction{margin-top:22px;background:var(--surface);border:1px solid rgba(227,166,59,.3);border-radius:14px;padding:18px 20px;display:grid;gap:6px}
+.correction h3{color:var(--warn)}
+
+pre{background:var(--surface);border:1px solid var(--stroke);border-radius:12px;padding:16px 18px;overflow-x:auto;font:13.5px/1.6 var(--mono);color:var(--text);margin-top:16px}
+.btn{display:inline-flex;align-items:center;gap:10px;padding:13px 26px;border-radius:12px;background:var(--accent);color:#fff;font-weight:600;font-size:15px;text-decoration:none;margin-top:18px}
+.btn:hover{background:#3370e0}
+
+.stages{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin-top:24px}
+.stage{background:var(--surface);border:1px solid var(--stroke);border-radius:14px;padding:22px;display:grid;gap:8px;align-content:start}
+.stage .n{font-family:var(--mono);font-size:12px;color:var(--accent)}
+.stage p{font-size:14.5px;color:var(--dim)}
+.stage .bound{font-size:13px;color:var(--text);border-top:1px solid var(--stroke);padding-top:10px}
+.contact{display:flex;flex-wrap:wrap;align-items:center;gap:14px;margin-top:28px}
+.email{display:inline-flex;align-items:center;padding:14px 24px;border-radius:12px;background:var(--surface);border:1px solid var(--stroke-h);color:var(--accent);font:500 15px var(--mono);text-decoration:none;user-select:all}
+.footer{padding:28px;text-align:center;font-size:12px;color:var(--muted);border-top:1px solid var(--stroke)}
+a:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+@media(max-width:820px){.figs,.stages{grid-template-columns:minmax(0,1fr)}.cols{grid-template-columns:minmax(0,1fr)}}
+@media(max-width:640px){.nav-r a:not(.nav-cta){display:none}section{padding:48px 0}}
+</style>
+</head>
+<body>
+
+<nav>
+  <a class="brand" href="../">Manifolds<span>X</span></a>
+  <div class="nav-r">
+    <a href="#result">Result</a>
+    <a href="#method">Method</a>
+    <a href="#limits">Limits</a>
+    <a href="#reproduce">Reproduce</a>
+    <a href="#work" class="nav-cta">Work with me</a>
+  </div>
+</nav>
+
+<main class="wrap">
+  <section class="hero">
+    <div class="tag">Benchmark · reproducible</div>
+    <h1>Two-stage Stewart platform: exact loop closure, checked against forward kinematics</h1>
+    <p class="lede">A two-stage Stewart platform driven by its 12 leg lengths for 18 s. With every joint satisfied, each platform's pose is pure geometry, so the exact answer is known without running any dynamics. This page scores ManifoldsX and a MuJoCo model of the same mechanism against that answer, and gives you everything needed to check it.</p>
+    <video autoplay muted loop playsinline preload="metadata" aria-label="The two-stage Stewart platform in motion">
+      <source src="../Double_Stewart.mp4" type="video/mp4">
+    </video>
+  </section>
+
+  <section id="result">
+    <div class="tag">Result</div>
+    <h2>Worst-case top-platform error over the 18 s run</h2>
+    <div class="figs">
+      <div class="fig mx">
+        <div class="who"><i style="background:var(--mx)"></i>ManifoldsX</div>
+        <div class="big">0.00002<small>mm</small></div>
+        <div class="sub">13–14× real time. Set by its Newton tolerance; it doesn't grow with the step.</div>
+      </div>
+      <div class="fig">
+        <div class="who"><i style="background:var(--mj)"></i>MuJoCo, 1 ms steps</div>
+        <div class="big">0.11<small>mm</small></div>
+        <div class="sub">16.6× real time, stiffest constraint settings.</div>
+      </div>
+      <div class="fig">
+        <div class="who"><i style="background:var(--mj)"></i>MuJoCo, 0.25 ms steps</div>
+        <div class="big">0.0031<small>mm</small></div>
+        <div class="sub">4× real time, stiffest constraint settings.</div>
+      </div>
+    </div>
+    <p class="small note">Single core. MuJoCo 3.15 with the stiffest constraint settings it accepts; with its default settings the error is 43 mm at any step size. One model and one load case: read the limits below before drawing conclusions.</p>
+
+    <figure>
+      <div class="legend" aria-hidden="true">
+        <span><svg width="26" height="12"><line x1="1" y1="6" x2="25" y2="6" stroke="#d9733a" stroke-width="2"/><circle cx="13" cy="6" r="4" fill="#d9733a"/></svg>MuJoCo implicitfast, stiffest settings</span>
+        <span><svg width="26" height="12"><line x1="1" y1="6" x2="25" y2="6" stroke="#d9733a" stroke-width="2" stroke-dasharray="5 4"/><rect x="9" y="2" width="8" height="8" fill="#090e18" stroke="#d9733a" stroke-width="2"/></svg>MuJoCo RK4, stiffest settings</span>
+        <span><svg width="26" height="12"><line x1="1" y1="6" x2="25" y2="6" stroke="#d9733a" stroke-width="2" stroke-dasharray="1.5 4" stroke-linecap="round"/><circle cx="13" cy="6" r="4" fill="#090e18" stroke="#d9733a" stroke-width="2"/></svg>MuJoCo implicitfast, default settings</span>
+        <span><svg width="26" height="12"><path d="M13 1 L18 6 L13 11 L8 6 Z" fill="#4a8af5"/></svg>ManifoldsX</span>
+      </div>
+      <div class="chart-scroll"><svg id="chart" viewBox="0 0 920 520" role="img" aria-label="Speed against worst-case platform error for ManifoldsX and MuJoCo; the table below lists every point."></svg></div>
+      <div class="tip" id="tip" hidden></div>
+      <figcaption>Both axes are logarithmic. Right is faster, lower is more accurate. Labels on the MuJoCo points are step sizes. Speeds are from one desktop machine; a second machine gave the same errors and the same speed ratios.</figcaption>
+    </figure>
+
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th scope="col">Setup</th><th scope="col">Speed (× real time)</th><th scope="col">Loop gap (mm)</th><th scope="col">Leg-length error (mm)</th><th scope="col">Platform error (mm)</th></tr></thead>
+        <tbody>
+          <tr class="mxrow"><td>ManifoldsX, HHT index-3, error tolerance 1e-5, steps up to 3 ms</td><td>13–14</td><td>0.00001</td><td>exact</td><td>0.00002</td></tr>
+          <tr class="mxrow"><td>ManifoldsX, fixed 1 ms steps, Newton tolerance 1e-6</td><td>8–9</td><td>0.006</td><td>exact</td><td>0.0097</td></tr>
+          <tr><td>MuJoCo implicitfast, 2 ms, stiffest</td><td>31</td><td>0.006</td><td>0.20</td><td>0.33</td></tr>
+          <tr><td>MuJoCo implicitfast, 1 ms, stiffest</td><td>16.6</td><td>0.0017</td><td>0.069</td><td>0.11</td></tr>
+          <tr><td>MuJoCo implicitfast, 0.5 ms, stiffest</td><td>7.9</td><td>0.0004</td><td>0.017</td><td>0.028</td></tr>
+          <tr><td>MuJoCo implicitfast, 0.25 ms, stiffest</td><td>4.0</td><td>0.0001</td><td>0.0016</td><td>0.0031</td></tr>
+          <tr><td>MuJoCo RK4, 1 ms / 0.25 ms, stiffest</td><td>4.2 / 1.0</td><td>0.0008 / 0.00006</td><td>0.13 / 0.007</td><td>0.21 / 0.011</td></tr>
+          <tr><td>MuJoCo implicitfast, 1 ms, default settings</td><td>17.7</td><td>6.0</td><td>7.1</td><td>43</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="small note">"Exact": ManifoldsX drives the leg lengths as constraints, so they hold to its Newton tolerance. Stiffest MuJoCo settings: constraint time constant = 2 × step (MuJoCo's lower limit) and solimp 0.9999. Default: 20 ms and 0.9 / 0.95.</p>
+  </section>
+
+  <section id="method">
+    <div class="tag">Method</div>
+    <h2>How it was measured</h2>
+    <div class="cols">
+      <dl>
+        <dt>Model</dt>
+        <dd>Two stacked Stewart platforms: 26 moving bodies, 24 spherical and 12 prismatic joints. The 12 leg lengths follow tables (spline-smoothed, sampled every 1 ms, linear between samples) for 18 s. Both solvers read the same model file.</dd>
+        <dt>ManifoldsX</dt>
+        <dd>Index-3 HHT (α = 0.3) with a full Newton matrix and local error control at 1e-5, steps up to 3 ms. Joints and leg drives are exact constraints.</dd>
+        <dt>MuJoCo 3.15</dt>
+        <dd>Same bodies, masses, inertias and joint points. Each loop closes with an equality connect. Each leg follows its table through a joint equality coupled to a virtual clock joint, so the constraint sees the target's velocity as well as its position. A plain C loop around <code>mj_step</code> refreshes the targets every step.</dd>
+      </dl>
+      <dl>
+        <dt>Reference</dt>
+        <dd>Forward kinematics. Both stages are solved from the 12 leg lengths with Newton's method at every saved time, to 1e-14 m, with no dynamics and no solver involved.</dd>
+        <dt>Metrics</dt>
+        <dd>Worst case over the run of the top platform's position error against the reference, the largest loop gap, and the largest leg-length error.</dd>
+        <dt>Cost</dt>
+        <dd>Single-core wall time for the 18 s run. Re-run on a second machine (2-core cloud instance, MuJoCo 3.15.0): ManifoldsX 13.6×, MuJoCo 1 ms 15.7×, 0.25 ms 4.0× real time (medians), with identical errors.</dd>
+      </dl>
+    </div>
+    <h3 style="margin-top:34px">Why the errors differ</h3>
+    <p class="dim">ManifoldsX solves joint and drive positions at every step, so its error is set by its Newton tolerance and doesn't grow with the step size. MuJoCo enforces constraints at acceleration level with stabilization. Each constraint trails by roughly acceleration × time constant², and the time constant can't go below twice the step, so its error falls with the square of the step.</p>
+  </section>
+
+  <section id="limits">
+    <div class="tag">Limits</div>
+    <h2>What this result does not show</h2>
+    <ul class="limits">
+      <li><b>One model, prescribed motion.</b> It measures closed-loop kinematic accuracy under driven motion. It says nothing about contact, force-driven dynamics, or throughput across many parallel environments, which is what MuJoCo is designed for.</li>
+      <li><b>MuJoCo has no built-in time-driven joint constraint.</b> The clock-joint drive is my construction from standard MuJoCo features. If you know a better MuJoCo setup for driven loops, I'd like to hear it and add it.</li>
+      <li><b>ManifoldsX itself is not public.</b> You can rerun the MuJoCo side and the forward-kinematics reference, and score the saved ManifoldsX trajectories, but you can't run ManifoldsX yourself.</li>
+      <li><b>One machine for the published speeds.</b> A second machine gave the same errors and speed ratios within about 20%.</li>
+    </ul>
+    <div class="correction">
+      <h3>Correction</h3>
+      <p class="small">An earlier internal version of this benchmark put ManifoldsX at 0.0004 mm. That figure came from scoring against ManifoldsX's own 0.25 ms run through a cubic spline, which overshoots at the 1 ms kinks of the piecewise-linear leg tables. Scored against forward kinematics, it is 0.00002 mm. The MuJoCo numbers didn't change.</p>
+    </div>
+  </section>
+
+  <section id="reproduce">
+    <div class="tag">Reproduce</div>
+    <h2>Run it yourself</h2>
+    <p class="dim">The package holds the model, the MuJoCo twin, the forward-kinematics reference, the scripts, every result in the table and the saved ManifoldsX trajectories.</p>
+    <a class="btn" href="double_stewart_benchmark.zip" download>Download the package (zip, 11 MB)</a>
+<pre>pip install mujoco==3.15.0 numpy scipy
+cd double_stewart_benchmark/mujoco
+../run_all.sh            # MuJoCo rows; saved ManifoldsX run scored against forward kinematics
+
+# score any trajectory, from either solver, against forward kinematics
+python3 ../reference/fk_reference.py ../results/mx_accurate_traj.csv
+python3 mj_stewart.py 0.001 implicitfast 0.002 1e8 18 mj_1ms.csv
+python3 ../reference/fk_reference.py mj_1ms.csv</pre>
+    <p class="small note"><code>run_all.sh</code> builds the C stepping loop with gcc. Timings vary about ±10% between runs on one machine.</p>
+  </section>
+
+  <section id="work">
+    <div class="tag">Work with me</div>
+    <h2>Have a question about one of your mechanisms?</h2>
+    <p class="dim">I take on simulation studies of closed-loop mechanisms: actuator sizing, load envelopes along a motion, loop-closure accuracy, and independent checks of existing models.</p>
+    <div class="stages">
+      <div class="stage">
+        <div class="n">1 · Free</div>
+        <h3>Initial review</h3>
+        <p>Send a short description of the mechanism and the question. I reply with a written feasibility note: what I would model, what it would answer and what I would need from you.</p>
+        <p class="bound">No custom model, CAD cleanup or load numbers at this stage.</p>
+      </div>
+      <div class="stage">
+        <div class="n">2 · Fixed price</div>
+        <h3>Pilot study</h3>
+        <p>One mechanism, one engineering question, an agreed set of motion or load cases, and a concise results report.</p>
+        <p class="bound">Quoted after I review your inputs, with the assumptions, acceptance criteria and one revision written down.</p>
+      </div>
+      <div class="stage">
+        <div class="n">3 · Scoped</div>
+        <h3>Further work</h3>
+        <p>More cases, parameter identification, optimization or integration with your tools.</p>
+        <p class="bound">Scoped and priced separately.</p>
+      </div>
+    </div>
+    <div class="contact">
+      <a class="email" href="mailto:manifoldsx.eng@gmail.com">manifoldsx.eng@gmail.com</a>
+      <span class="small">ManifoldsX is built and run by Yosi BZ, with 20 years in multibody dynamics simulation.</span>
+    </div>
+  </section>
+</main>
+
+<footer class="footer">Independent Applied Research in Multibody Dynamics · © 2026 ManifoldsX</footer>
+
+<script>
+(() => {
+  // Speed (x real time) and worst-case top-platform error (mm), from the table above.
+  const MJ = "#d9733a", MX = "#4a8af5", SURF = "#090e18";
+  const series = [
+    { name: "MuJoCo implicitfast, stiffest", color: MJ, dash: "", marker: "circle", fill: true,
+      pts: [[31.2, 0.328, "2 ms"], [16.63, 0.112, "1 ms"], [7.92, 0.0281, "0.5 ms"], [3.96, 0.00308, "0.25 ms"]] },
+    { name: "MuJoCo RK4, stiffest", color: MJ, dash: "6 5", marker: "square", fill: false,
+      pts: [[7.95, 0.568, "2 ms"], [4.18, 0.210, "1 ms"], [2.0, 0.0577, "0.5 ms"], [0.97, 0.0113, "0.25 ms"]] },
+    { name: "MuJoCo implicitfast, default settings", color: MJ, dash: "1.5 5", marker: "circle", fill: false,
+      pts: [[29.97, 42.9, "2 ms"], [17.72, 43.0, "1 ms"], [11.11, 43.0, "0.5 ms"], [9.8, 43.0, "0.25 ms"]] },
+    { name: "ManifoldsX", color: MX, dash: null, marker: "diamond", fill: true,
+      pts: [[13.8, 0.0000183, "error control, steps ≤ 3 ms"], [8.8, 0.00966, "fixed 1 ms, Newton tol 1e-6"]] },
+  ];
+  const W = 920, H = 520, m = { l: 92, r: 24, t: 16, b: 58 };
+  const x0 = Math.log10(0.7), x1 = Math.log10(50), y0 = Math.log10(5e-6), y1 = Math.log10(200);
+  const X = (v) => m.l + (Math.log10(v) - x0) / (x1 - x0) * (W - m.l - m.r);
+  const Y = (v) => m.t + (y1 - Math.log10(v)) / (y1 - y0) * (H - m.t - m.b);
+  const ns = "http://www.w3.org/2000/svg";
+  const svg = document.getElementById("chart");
+  const el = (tag, attrs, parent = svg) => { const e = document.createElementNS(ns, tag); for (const k in attrs) e.setAttribute(k, attrs[k]); parent.appendChild(e); return e; };
+  const grid = el("g", { class: "grid" }), axis = el("g", { class: "axis" });
+  const yt = [[1e-5, "0.00001"], [1e-4, "0.0001"], [1e-3, "0.001"], [1e-2, "0.01"], [1e-1, "0.1"], [1, "1"], [10, "10"], [100, "100"]];
+  for (const [v, s] of yt) { el("line", { x1: m.l, x2: W - m.r, y1: Y(v), y2: Y(v) }, grid); el("text", { x: m.l - 10, y: Y(v) + 4, "text-anchor": "end" }, axis).textContent = s; }
+  for (const v of [1, 2, 5, 10, 20, 40]) { el("line", { x1: X(v), x2: X(v), y1: m.t, y2: H - m.b }, grid); el("text", { x: X(v), y: H - m.b + 20, "text-anchor": "middle" }, axis).textContent = v + "×"; }
+  el("line", { x1: X(1), x2: X(1), y1: m.t, y2: H - m.b, stroke: "rgba(220,228,240,.35)", "stroke-dasharray": "2 4" });
+  el("text", { x: X(1) + 6, y: H - m.b - 8, class: "axl" }).textContent = "real time";
+  el("text", { x: (m.l + W - m.r) / 2, y: H - 10, "text-anchor": "middle", class: "axl" }).textContent = "Speed, × real time on one core (right is faster)";
+  el("text", { x: 18, y: (m.t + H - m.b) / 2, "text-anchor": "middle", class: "axl", transform: `rotate(-90 18 ${(m.t + H - m.b) / 2})` }).textContent = "Worst-case platform error, mm (lower is better)";
+  const tip = document.getElementById("tip"), fig = svg.closest("figure");
+  function marker(s, x, y) {
+    const a = { fill: s.fill ? s.color : SURF, stroke: s.fill ? SURF : s.color, "stroke-width": 2 };
+    if (s.marker === "square") return el("rect", { x: x - 5, y: y - 5, width: 10, height: 10, ...a });
+    if (s.marker === "diamond") return el("path", { d: `M${x} ${y - 9} L${x + 9} ${y} L${x} ${y + 9} L${x - 9} ${y} Z`, ...a });
+    return el("circle", { cx: x, cy: y, r: 5.5, ...a });
+  }
+  const fmt = (v) => v >= 1 ? v.toFixed(0) : v >= 0.01 ? v.toPrecision(2) : v.toPrecision(2).replace(/0+$/, "");
+  for (const s of series) {
+    const pts = [...s.pts].sort((a, b) => a[0] - b[0]);
+    if (s.dash !== null) el("polyline", { points: pts.map((p) => `${X(p[0])},${Y(p[1])}`).join(" "), fill: "none", stroke: s.color, "stroke-width": 2, "stroke-dasharray": s.dash, "stroke-linecap": "round", "stroke-linejoin": "round" });
+    for (const p of s.pts) {
+      const mk = marker(s, X(p[0]), Y(p[1]));
+      const hit = el("circle", { cx: X(p[0]), cy: Y(p[1]), r: 14, fill: "transparent", tabindex: 0, "aria-label": `${s.name}, ${p[2]}: ${p[0]}× real time, ${fmt(p[1])} mm` });
+      const show = () => {
+        tip.innerHTML = `<b>${s.name}</b><br>${p[2]}<br>${p[0]}× real time · ${fmt(p[1])} mm`;
+        tip.hidden = false;
+        const r = svg.getBoundingClientRect(), f = fig.getBoundingClientRect(), sx = r.width / W;
+        let left = r.left - f.left + X(p[0]) * sx + 12; const top = r.top - f.top + Y(p[1]) * sx - 10;
+        if (left + 240 > f.width) left -= 260;
+        tip.style.left = left + "px"; tip.style.top = top + "px";
+      };
+      hit.addEventListener("pointerenter", show); hit.addEventListener("focus", show);
+      hit.addEventListener("pointerleave", () => { tip.hidden = true; }); hit.addEventListener("blur", () => { tip.hidden = true; });
+    }
+  }
+  // selective direct labels: step sizes on the implicitfast-stiffest line, and the ManifoldsX points
+  for (const p of series[0].pts) el("text", { x: X(p[0]) + 9, y: Y(p[1]) - 9, class: "lab", fill: "#dce4f0" }).textContent = p[2];
+  el("text", { x: X(13.8) + 14, y: Y(0.0000183) + 4, class: "lab" }).textContent = "ManifoldsX, error control";
+  el("text", { x: X(8.8) + 14, y: Y(0.00966) + 4, class: "lab" }).textContent = "ManifoldsX, fixed 1 ms";
+  el("text", { x: X(17.72), y: Y(43) - 14, class: "lab", "text-anchor": "middle" }).textContent = "MuJoCo default settings: 43 mm at every step";
+})();
+</script>
+</body>
+</html>
