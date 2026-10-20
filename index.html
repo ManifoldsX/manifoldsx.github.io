@@ -126,7 +126,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:cen
   <div class="hero-eyebrow">Independent Applied Research · Multibody Dynamics</div>
   <h1>Multibody dynamics.<br><em>Mechanisms, motion and evidence.</em></h1>
   <p class="hero-p">
-    ManifoldsX is an independent C++ solver for constrained mechanical systems.
+    ManifoldsX is an independent C++ multibody solver with differentiable dynamics for constrained mechanical systems.
     Explore mechanism animations, analytical checks and numerical studies.
   </p>
   <div class="hero-actions">
@@ -171,8 +171,8 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:cen
     </div>
     <div class="domain-card">
       <div class="domain-icon">∇</div>
-      <h3>Sensitivity & Optimization</h3>
-      <p>How changes in mass, stiffness and actuation affect motion, loads and model calibration.</p>
+      <h3>Differentiable Dynamics</h3>
+      <p>Calculate how motion and joint loads change with model parameters, providing gradients for calibration and design optimization.</p>
     </div>
   </div>
 </section>
@@ -197,11 +197,15 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:cen
       </div>
       <div class="feat">
         <div class="feat-dot"></div>
-        <div><h3>Browser-Based Research Interface</h3><p>A visual environment for building test models, inspecting states, running experiments, and reviewing solver output.</p></div>
+        <div><h3>Model Builder &amp; Simulation Viewer</h3><p>A visual environment for building test models, inspecting states, running experiments, and reviewing solver output.</p></div>
       </div>
       <div class="feat">
         <div class="feat-dot"></div>
         <div><h3>Contact Numerics</h3><p>Contact detection and compliant force models for studying impact and frictional motion.</p></div>
+      </div>
+      <div class="feat">
+        <div class="feat-dot"></div>
+        <div><h3>Analytical Sensitivities</h3><p>Differentiate the constrained equations and consistent initial conditions to compute parameter sensitivities of motion and joint reactions. The sensitivity calculation reuses the solver’s sparse factorization.</p></div>
       </div>
       <div class="feat">
         <div class="feat-dot"></div>
