@@ -35,10 +35,11 @@ footer{border-top:1px solid var(--line);padding:28px 24px;text-align:center;colo
 </head>
 <body>
 <a class="skip" href="#main">Skip to examples</a>
-<nav aria-label="Main navigation"><a class="brand" href="../">Manifolds<span>X</span></a><div class="navlinks"><a class="home" href="../">Home</a><a href="../papers/">Papers</a><a href="../stewart-benchmark/">Benchmark</a><a href="#contact">Get in touch</a></div></nav>
+<nav aria-label="Main navigation"><a class="brand" href="../">Manifolds<span>X</span></a><div class="navlinks"><a class="home" href="../">Home</a><a href="../differentiable-dynamics/">Sensitivities</a><a href="../stewart-benchmark/">Benchmark</a><a href="#contact">Get in touch</a></div></nav>
 <main id="main">
 <header class="hero"><div class="eyebrow">Simulation gallery · By Yosi BZ</div><h1>Mechanisms in motion.</h1><p class="lead">Explore ManifoldsX through moving mechanisms, short explanations, and the engineering questions behind each example.</p><div class="jump" aria-label="Choose an example"><a href="#double-stewart">01 · Double Stewart</a><a href="#100-link-pendulum">02 · 100-link pendulum</a><a href="#stewart-platform">03 · Stewart platform</a></div></header>
 
+<section class="contact" aria-labelledby="diff-example"><div class="eyebrow">Analytic sensitivities</div><h2 id="diff-example">What changes when stiffness or damping changes?</h2><p>Explore validated spring and 6D bushing trajectory sensitivities, with numerical checks and a clear supported scope. These studies are separate from the Stewart mechanism videos below.</p><a class="button" href="../differentiable-dynamics/">Explore the sensitivity results →</a></section>
 <section class="contact" style="margin-top:16px" aria-labelledby="rotation-study"><div class="eyebrow">New study</div><h2 id="rotation-study">Gyroscopes, precession and tumbling</h2><p>Three rotational-dynamics cases, with animations, analytical checks and a combined report.</p><a class="button" href="../papers/rotational-dynamics/">Explore the study →</a></section>
 <article class="case" id="double-stewart">
 <div class="intro"><div><span class="number">01 / Closed-loop robotics</span><h2>Two stages.<br>Twelve driven legs.</h2><span class="badge">Numerical benchmark</span></div><p>Stack two Stewart platforms and every motion of the lower stage moves the upper stage's base. The solver must keep the connected joints together while all twelve leg lengths change.</p></div>
@@ -61,7 +62,7 @@ footer{border-top:1px solid var(--line);padding:28px 24px;text-align:center;colo
 <div class="actions"><a href="#stewart-platform">Link to this example</a><a href="../Stewart.mp4" download>Download video</a></div>
 </article>
 
-<section class="contact" id="contact"><div class="eyebrow">Discuss a mechanism</div><h2>What would you like to simulate?</h2><p>Send a brief description of your mechanism and the question you need answered. Benchmark suggestions and technical feedback are welcome.</p><a href="mailto:manifoldsx.eng@gmail.com">manifoldsx.eng@gmail.com</a></section>
+<section class="contact" id="contact"><div class="eyebrow">Discuss a mechanism</div><h2>Request an example to try</h2><p>Tell us your mechanism, the output you need and your operating system. We will discuss a suitable evaluation example and how to run it. Feedback on setup, results and missing capabilities is welcome. Start with a non-confidential description.</p><a href="mailto:manifoldsx.eng@gmail.com">manifoldsx.eng@gmail.com</a></section>
 </main><footer>ManifoldsX · Independent multibody dynamics research · Yosi BZ · © 2026</footer>
 </body>
 </html>
