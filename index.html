@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ManifoldsX — Mechanism Simulation & Analytic Sensitivities</title>
-<meta name="description" content="Explore constrained mechanism simulation and validated analytic spring and bushing sensitivities. Request an example to evaluate ManifoldsX on your engineering problem.">
+<title>ManifoldsX — Multibody Dynamics</title>
+<meta name="description" content="An independent C++ multibody solver. Explore mechanism animations, analytical checks, numerical benchmarks and technical reports.">
 <meta name="author" content="Yosi BZ">
 <link rel="canonical" href="https://manifoldsx.github.io/">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -112,25 +112,26 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:cen
 <nav aria-label="Main navigation">
   <a class="brand" href="./" style="text-decoration:none">Manifolds<span>X</span></a>
   <div class="nav-r">
-    <a href="differentiable-dynamics/">Sensitivities</a>
+    <a href="#research">Research Focus</a>
     <a href="#technology">Capabilities</a>
     <a href="papers/">Papers</a>
     <a href="examples/">Examples</a>
     <a href="stewart-benchmark/">Benchmark</a>
-    <a href="#contact" class="nav-cta">Request an example</a>
+    <a href="#contact" class="nav-cta">Contact</a>
   </div>
 </nav>
 
 <!-- HERO -->
 <section class="hero">
-  <div class="hero-eyebrow">Mechanism simulation · Analytic parameter sensitivities</div>
-  <h1>Understand the motion.<br><em>Measure what changes it.</em></h1>
+  <div class="hero-eyebrow">Independent Applied Research · Multibody Dynamics</div>
+  <h1>Multibody dynamics.<br><em>Mechanisms, motion and evidence.</em></h1>
   <p class="hero-p">
-    Simulate constrained mechanisms and calculate how supported spring and bushing parameters affect motion and joint loads. Explore the evidence, try an example, and help shape a tool around your engineering questions.
+    ManifoldsX is an independent C++ multibody solver with differentiable dynamics for constrained mechanical systems.
+    Explore mechanism animations, analytical checks and numerical studies.
   </p>
   <div class="hero-actions">
-    <a href="#contact" class="btn-primary">Request an example to try</a>
-    <a href="differentiable-dynamics/" class="btn-ghost">Explore analytic sensitivities →</a>
+    <a href="examples/" class="btn-primary">Explore Simulation Gallery</a>
+    <a href="papers/" class="btn-ghost">Read the papers →</a>
   </div>
 
   <div class="hero-video-wrap">
@@ -144,14 +145,6 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:cen
 <div class="domains-tag">Latest paper · 20 October 2026</div><h2 id="latest-report">Three studies in rotational dynamics</h2>
 <p class="domains-p" style="margin-bottom:24px">A gimballed gyroscope, a steadily precessing top and a tumbling body. Three animations, analytical comparisons and a five-page report.</p>
 <a class="btn-ghost" href="papers/rotational-dynamics/">Explore the study →</a></section>
-<section class="domains" style="padding-top:45px;padding-bottom:45px" aria-labelledby="sensitivity-evidence">
-<div class="domains-tag">Validated capability · October 2026</div><h2 id="sensitivity-evidence">From parameter changes to motion and loads</h2>
-<p class="domains-p" style="margin-bottom:24px">Analytic forward sensitivities through consistent initialization and implicit HHT integration, for supported models. Numerical validation and scope are available for review.</p>
-<div class="domain-grid">
-<div class="domain-card"><h3>12 bushing coefficients</h3><p>Three translational and three rotational stiffnesses, plus their damping coefficients. One scalar parameter per sensitivity instance.</p></div>
-<div class="domain-card"><h3>24 trajectories · 30 seconds each</h3><p>Published bushing validation covers grounded and moving-parent connections, checked against independent perturbed simulations.</p></div>
-<div class="domain-card"><h3>Zero sensitivity FD residual evaluations</h3><p>The supported analytic path computes derivatives without finite-differencing the step residual. Finite differences remain a validation reference.</p></div>
-</div><div class="hero-actions" style="justify-content:flex-start;margin-top:24px"><a class="btn-ghost" href="differentiable-dynamics/">See results and supported scope →</a></div></section>
 <!-- RESEARCH FOCUS -->
 <section class="domains" id="research">
   <div class="domains-tag">Research Focus</div>
@@ -179,7 +172,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:cen
     <div class="domain-card">
       <div class="domain-icon">∇</div>
       <h3>Differentiable Dynamics</h3>
-      <p>Calculate motion and load sensitivities to supported spring and bushing stiffness/damping parameters. Explore whether these gradients can help your calibration or design workflow.</p>
+      <p>Calculate how motion and joint loads change with model parameters, providing gradients for calibration and design optimization.</p>
     </div>
   </div>
 </section>
@@ -192,9 +185,9 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:cen
     <div class="feat-grid">
       <div class="feat"><div class="feat-dot"></div><div><h3>Mechanical Systems</h3><p>Simulate connected bodies, joints, springs and dampers, including mechanisms with closed loops.</p></div></div>
       <div class="feat"><div class="feat-dot"></div><div><h3>Motion &amp; Loads</h3><p>Study how a mechanism moves and the forces acting on its parts and joints.</p></div></div>
-      <div class="feat"><div class="feat-dot"></div><div><h3>Model Inputs &amp; Results</h3><p>C++ and JSON model interfaces, with mechanism animations and documented numerical studies. Ask about a suitable evaluation example.</p></div></div>
+      <div class="feat"><div class="feat-dot"></div><div><h3>Model Builder &amp; Simulation Viewer</h3><p>Build models, run simulations and explore the results visually.</p></div></div>
       <div class="feat"><div class="feat-dot"></div><div><h3>Contact &amp; Impact</h3><p>Model bodies touching, colliding and sliding with friction.</p></div></div>
-      <div class="feat"><div class="feat-dot"></div><div><h3>Differentiable Dynamics</h3><p>Analytic spring and bushing parameter sensitivities on supported models. See the sensitivity page for numerical evidence and current boundaries.</p></div></div>
+      <div class="feat"><div class="feat-dot"></div><div><h3>Differentiable Dynamics</h3><p>Calculate how design changes affect motion and loads, supporting calibration and optimization.</p></div></div>
       <div class="feat"><div class="feat-dot"></div><div><h3>Validation &amp; Benchmarks</h3><p>Compare simulation results with analytical solutions and documented reference cases.</p></div></div>
     </div>
   </div>
@@ -203,7 +196,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:cen
 <!-- DEMOS -->
 <section class="demos" id="demos">
   <div class="demos-inner">
-    <div class="domains-tag">Numerical Studies</div>
+    <div class="domains-tag">Experimental Studies</div>
     <h2>Mechanism and solver studies</h2>
     <p class="domains-p">Watch the mechanisms in motion, then follow the linked studies for numerical checks and solver settings.</p>
     <div class="demo-grid">
@@ -240,12 +233,12 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:cen
 
 <!-- CTA -->
 <section class="cta-section" id="contact">
-  <h2>Would this help with your mechanism?</h2>
+  <h2>Research contact</h2>
   <p>
-    Request an example to evaluate, or suggest a benchmark. Tell us what mechanism you work with, the output you need, your current tools and your operating system. We will discuss a suitable case and the available way to run it.
+    ManifoldsX is an independent technical research effort. Questions, benchmark ideas, feedback,
+    and research discussions are welcome.
   </p>
-  <a href="mailto:manifoldsx.eng@gmail.com?subject=ManifoldsX%20example%20evaluation" class="cta-email">✉ manifoldsx.eng@gmail.com</a>
-<p style="margin-top:24px;font-size:14px">Early evaluation · We welcome feedback on setup, useful outputs and missing capabilities. Please start with a non-confidential description.</p>
+  <a href="mailto:manifoldsx.eng@gmail.com" class="cta-email">✉ manifoldsx.eng@gmail.com</a>
 </section>
 
 <footer class="footer">ManifoldsX · Independent multibody dynamics research · Yosi BZ · © 2026</footer>
