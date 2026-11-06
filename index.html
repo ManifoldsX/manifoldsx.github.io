@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>ManifoldsX — Multibody Dynamics</title>
-<meta name="description" content="An independent C++ multibody solver. Explore mechanism animations, analytical checks, numerical benchmarks and technical reports.">
+<meta name="description" content="ManifoldsX: a C++ multibody solver for constrained mechanisms, with results checked against exact references.">
 <meta name="author" content="Yosi BZ">
 <link rel="canonical" href="https://manifoldsx.github.io/">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -34,7 +34,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:cen
 .hero{min-height:auto;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:120px 24px 70px;position:relative}
 .hero::before{content:'';position:absolute;top:-300px;left:50%;transform:translateX(-50%);width:1200px;height:1200px;background:radial-gradient(ellipse,var(--accent-g) 0%,transparent 60%);pointer-events:none}
 .hero-eyebrow{position:relative;font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);margin-bottom:18px}
-.hero h1{font-size:clamp(36px,5.5vw,72px);font-weight:800;letter-spacing:-.045em;line-height:1.03;max-width:920px;margin-bottom:28px}
+.hero h1{font-size:clamp(32px,4.4vw,54px);font-weight:800;letter-spacing:-.045em;line-height:1.03;max-width:920px;margin-bottom:28px}
 .hero h1 em{font-style:normal;background:linear-gradient(135deg,#4a8af5,#a78bfa);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
 .hero-p{font-size:clamp(16px,1.8vw,20px);color:var(--dim);max-width:670px;line-height:1.55;margin-bottom:48px;font-weight:300}
 .hero-actions{display:flex;gap:16px;flex-wrap:wrap;justify-content:center}
@@ -58,6 +58,14 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:cen
 .domain-icon{font-size:28px;margin-bottom:16px}
 .domain-card h3{font-size:15px;font-weight:600;margin-bottom:8px}
 .domain-card p{font-size:13px;color:var(--dim);line-height:1.55}
+
+/* RESULTS */
+.res-list{display:grid;gap:12px}
+.res{display:block;background:var(--surface);border:1px solid var(--stroke);border-radius:14px;padding:22px 24px;text-decoration:none;color:var(--text);transition:border-color .2s}
+.res:hover{border-color:var(--stroke-h)}
+.res h3{font-size:16px;font-weight:600;margin-bottom:6px}
+.res p{font-size:14px;color:var(--dim);line-height:1.55;margin-bottom:8px;max-width:760px}
+.res span{font-size:13px;color:var(--accent);font-weight:500}
 
 /* FEATURES */
 .features{padding:100px 24px;border-top:1px solid var(--stroke)}
@@ -112,26 +120,26 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:cen
 <nav aria-label="Main navigation">
   <a class="brand" href="./" style="text-decoration:none">Manifolds<span>X</span></a>
   <div class="nav-r">
-    <a href="#research">Research Focus</a>
-    <a href="#technology">Capabilities</a>
-    <a href="papers/">Papers</a>
+    <a href="#results">Results</a>
     <a href="examples/">Examples</a>
     <a href="stewart-benchmark/">Benchmark</a>
+    <a href="differentiable-dynamics/">Sensitivities</a>
+    <a href="papers/">Papers</a>
     <a href="#contact" class="nav-cta">Contact</a>
   </div>
 </nav>
 
 <!-- HERO -->
 <section class="hero">
-  <div class="hero-eyebrow">Independent Applied Research · Multibody Dynamics</div>
-  <h1>Multibody dynamics.<br><em>Mechanisms, motion and evidence.</em></h1>
+  <div class="hero-eyebrow">ManifoldsX</div>
+  <h1>Multibody dynamics,<br><em>checked against exact references.</em></h1>
   <p class="hero-p">
-    ManifoldsX is an independent C++ multibody solver with differentiable dynamics for constrained mechanical systems.
-    Explore mechanism animations, analytical checks and numerical studies.
+    A C++ solver for constrained mechanisms: closed loops, joint loads and analytic gradients.
+    Each result links to its method and its limits.
   </p>
   <div class="hero-actions">
-    <a href="examples/" class="btn-primary">Explore Simulation Gallery</a>
-    <a href="papers/" class="btn-ghost">Read the papers →</a>
+    <a href="#results" class="btn-primary">See the results</a>
+    <a href="examples/" class="btn-ghost">Simulation gallery →</a>
   </div>
 
   <div class="hero-video-wrap">
@@ -141,39 +149,26 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:cen
   </div>
 </section>
 
-<section class="domains" style="padding-top:45px;padding-bottom:45px" aria-labelledby="latest-report">
-<div class="domains-tag">Latest paper · 20 October 2026</div><h2 id="latest-report">Three studies in rotational dynamics</h2>
-<p class="domains-p" style="margin-bottom:24px">A gimballed gyroscope, a steadily precessing top and a tumbling body. Three animations, analytical comparisons and a five-page report.</p>
-<a class="btn-ghost" href="papers/rotational-dynamics/">Explore the study →</a></section>
-<!-- RESEARCH FOCUS -->
-<section class="domains" id="research">
-  <div class="domains-tag">Research Focus</div>
-  <h2>Questions driving the work</h2>
-  <p class="domains-p">
-    How well does a mechanism follow its constraints? How does accuracy change with the time step?
-    Each study starts with a mechanical question and checks the calculated motion.
-  </p>
+<!-- RESULTS -->
+<section class="domains" id="results" style="padding-top:60px" aria-labelledby="results-h">
+  <div class="domains-tag">Results</div>
+  <h2 id="results-h">What has been checked</h2>
+  <p class="domains-p">Each case is compared with a reference that does not come from the solver.</p>
+  <div class="res-list">
+    <a class="res" href="stewart-benchmark/"><h3>Two-stage Stewart platform</h3><p>Platform position stays within a micrometre of exact forward kinematics over the full run. MuJoCo at a similar speed is about a tenth of a millimetre off.</p><span>Benchmark and data →</span></a>
+    <a class="res" href="papers/rotational-dynamics/"><h3>Gyroscope, spinning top, tumbling body</h3><p>Motion agrees with the analytical solutions. Energy and momentum stay constant.</p><span>Report →</span></a>
+    <a class="res" href="differentiable-dynamics/"><h3>Parameter sensitivities</h3><p>Analytic gradients of motion and joint loads for springs and bushings, checked against finite differences over 30-second runs.</p><span>Scope and checks →</span></a>
+  </div>
+</section>
+
+<!-- APPLICATIONS -->
+<section class="domains" id="applications" aria-labelledby="apps-h">
+  <div class="domains-tag">Where it applies</div>
+  <h2 id="apps-h">Mechanisms where accuracy matters</h2>
   <div class="domain-grid">
-    <div class="domain-card">
-      <div class="domain-icon">⛓️</div>
-      <h3>Constrained Multibody Dynamics</h3>
-      <p>Simulate closed-loop mechanisms, long chains and systems with stiff springs and dampers.</p>
-    </div>
-    <div class="domain-card">
-      <div class="domain-icon">🤖</div>
-      <h3>Parallel Mechanisms</h3>
-      <p>Modeling and actuation studies for Stewart platforms, hexapods, and multi-stage robotic mechanisms.</p>
-    </div>
-    <div class="domain-card">
-      <div class="domain-icon">💥</div>
-      <h3>Contact & Impact</h3>
-      <p>Study how contact, impact and friction affect a mechanism’s motion.</p>
-    </div>
-    <div class="domain-card">
-      <div class="domain-icon">∇</div>
-      <h3>Differentiable Dynamics</h3>
-      <p>Calculate how motion and joint loads change with model parameters, providing gradients for calibration and design optimization.</p>
-    </div>
+    <div class="domain-card"><h3>Parallel robots and hexapods</h3><p>Closed-loop motion, actuator loads and positioning accuracy.</p></div>
+    <div class="domain-card"><h3>Closed-loop machinery</h3><p>Linkages and actuated mechanisms: load envelopes and independent model checks.</p></div>
+    <div class="domain-card"><h3>Chains and flexible systems</h3><p>Long chains, stiff springs, bushings and beams.</p></div>
   </div>
 </section>
 
@@ -202,15 +197,6 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:cen
     <div class="demo-grid">
       <div class="demo">
         <video class="demo-video" controls playsinline preload="metadata">
-          <source src="Double_Stewart.mp4" type="video/mp4">
-        </video>
-        <div class="demo-info">
-          <h3>Two-Stage Stewart Platform Study</h3>
-          <p>A coordinated parallel mechanism used to study multiple driven constraints and actuator trajectories. <a href="stewart-benchmark/" style="color:var(--accent);text-decoration:none">See the reproducible benchmark →</a></p>
-        </div>
-      </div>
-      <div class="demo">
-        <video class="demo-video" controls playsinline preload="metadata">
           <source src="100Links.mp4" type="video/mp4">
         </video>
         <div class="demo-info">
@@ -233,15 +219,15 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:cen
 
 <!-- CTA -->
 <section class="cta-section" id="contact">
-  <h2>Research contact</h2>
+  <h2>Have a mechanism question?</h2>
   <p>
-    ManifoldsX is an independent technical research effort. Questions, benchmark ideas, feedback,
-    and research discussions are welcome.
+    Send a short description. A written feasibility note is free.
+    If it fits, a small paid pilot answers one engineering question with a short report.
   </p>
   <a href="mailto:manifoldsx.eng@gmail.com" class="cta-email">✉ manifoldsx.eng@gmail.com</a>
 </section>
 
-<footer class="footer">ManifoldsX · Independent multibody dynamics research · Yosi BZ · © 2026</footer>
+<footer class="footer">ManifoldsX · Multibody dynamics · Yosi BZ · © 2026</footer>
 
 </body>
 </html>
