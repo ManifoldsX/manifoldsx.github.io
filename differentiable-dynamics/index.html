@@ -47,32 +47,21 @@
 
   <section class="section" id="evidence">
     <h2>How they are checked</h2>
-    <p>The derivatives cover consistent initialization, the implicit HHT step and the rotation update. Each is compared with independent perturbed simulations. These are numerical checks; they say nothing about hardware accuracy.</p>
-    <div class="table-wrap">
-      <table class="data">
-        <caption>Validation at solver revision b6e19fc</caption>
-        <thead><tr><th scope="col">Study</th><th scope="col">Evidence</th></tr></thead>
-        <tbody>
-          <tr><td>Spring stiffness and damping</td><td>Analytic trajectory derivatives, compared with finite differences over 30-second runs, plus term-by-term tangent checks.</td></tr>
-          <tr><td>6D bushings</td><td>All 12 diagonal coefficients; 24 trajectories of 30 seconds on grounded and moving-parent connections.</td></tr>
-          <tr><td>Bushing motion derivatives</td><td>Worst sampled error relative to the peak reference: 1.1&times;10<sup>&minus;7</sup> for position and rotation, 2.4&times;10<sup>&minus;7</sup> for velocity.</td></tr>
-          <tr><td>Bushing accelerations and loads</td><td>Same metric: about 5&times;10<sup>&minus;5</sup> for acceleration, multipliers and reactions, limited by the reference rather than the derivatives.</td></tr>
-          <tr><td>Sparse sensitivity solve</td><td>Damped chains up to 500 links, with one symbolic pattern analysis per run.</td></tr>
-        </tbody>
-      </table>
-    </div>
-    <p class="note">Errors are normalized by the peak reference value over the sampled times, not per component at every instant. In the bushing tests, computing sensitivities left the nominal trajectory bit-for-bit unchanged. Detailed reports for each study are available on request.</p>
+    <p>Each derivative is compared with independent perturbed simulations over 30-second runs, for springs and for all 12 bushing coefficients. For motion they agree to about one part in ten million of the peak response.</p>
+    <p>These are numerical checks of the derivatives. They say nothing about hardware accuracy.</p>
   </section>
 
   <section class="section">
     <h2>Scope</h2>
     <div class="notes">
-      <div><h3>Covered today</h3><p>Forward sensitivities for spring stiffness and damping and the 12 diagonal bushing coefficients, one parameter at a time, with index-3 HHT and full-rank revolute, spherical and translational joints.</p></div>
-      <div><h3>Not covered yet</h3><p>Contact, controllers and runtime loads, redundant or rank-changing constraints, projection and other integrators. Adaptive step decisions are not differentiated.</p></div>
+      <div><h3>Covered today</h3><p>Spring stiffness and damping and the 12 diagonal bushing coefficients, with revolute, spherical and translational joints.</p></div>
+      <div><h3>Not covered yet</h3><p>Contact, controllers, redundant constraints and adaptive step decisions.</p></div>
     </div>
+    <div class="links"><a class="button" href="ManifoldsX_Parameter_Sensitivities.pdf">Full report (PDF)</a></div>
+    <p class="note">Validation tables, metrics and full scope. 2 pages.</p>
   </section>
 
-  <section class="section contact" id="contact">
+<section class="section contact" id="contact">
     <h2>Have a parameter question?</h2>
     <p>Send a short description of the mechanism and the parameters that matter. A written feasibility note is free. If it fits, a small paid pilot answers one engineering question with a short report.</p>
     <a class="email" href="mailto:manifoldsx.eng@gmail.com?subject=ManifoldsX%20sensitivities">manifoldsx.eng@gmail.com</a>
