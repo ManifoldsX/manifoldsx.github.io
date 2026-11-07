@@ -96,3 +96,76 @@ p+p{margin-top:14px}
 }
 @media (prefers-reduced-motion:reduce){*{scroll-behavior:auto!important}}
 .visually-hidden{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+
+/* ---------- Inner pages ---------- */
+.page-head{padding-top:56px}
+.page-head .meta{font-family:var(--sans);font-size:15px;color:var(--muted);margin-bottom:12px}
+.links{display:flex;gap:22px;flex-wrap:wrap;margin-top:16px;font-family:var(--sans);font-size:16px}
+.links .button{font-size:16px}
+
+/* A case: heading, text, video, two short notes */
+.case{padding-top:72px}
+.case + .case{border-top:1px solid var(--rule);margin-top:72px}
+.case figure{margin-top:24px}
+.case video{width:100%;aspect-ratio:16/9;background:#0c1218;border-radius:6px}
+.case figcaption{margin-top:10px}
+.notes{display:grid;grid-template-columns:1fr 1fr;gap:36px;margin-top:28px}
+.notes h3{font-size:18px}
+.notes p{font-size:17px;color:var(--muted);margin-top:6px}
+
+/* Generic data table */
+.table-wrap{overflow-x:auto;margin-top:24px}
+table.data{border-collapse:collapse;width:100%;font-family:var(--sans);font-size:15px;line-height:1.45}
+table.data caption{text-align:left;caption-side:top;color:var(--muted);font-size:14px;padding-bottom:8px}
+table.data th{text-align:left;font-weight:500;color:var(--muted);padding:0 18px 8px 0;border-bottom:1px solid var(--ink);vertical-align:bottom}
+table.data td{padding:11px 18px 11px 0;border-bottom:1px solid var(--rule);vertical-align:top}
+table.data td.num,table.data th.num{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
+table.data tr.own td:first-child{font-weight:600}
+.note{font-family:var(--sans);font-size:14px;line-height:1.55;color:var(--muted);margin-top:14px;max-width:80ch}
+
+/* Method: definition list in two columns */
+.method{display:grid;grid-template-columns:1fr 1fr;gap:8px 44px;margin-top:20px}
+.method dt{font-family:var(--sans);font-weight:500;font-size:15px;margin-top:16px}
+.method dd{font-size:17px;color:var(--muted)}
+.limits{margin-top:16px;padding-left:1.1em;max-width:var(--measure)}
+.limits li+li{margin-top:12px}
+.aside{margin-top:28px;padding-left:18px;border-left:2px solid var(--rule);max-width:var(--measure)}
+.aside h3{font-size:17px}
+.aside p{font-size:16px;color:var(--muted);margin-top:4px}
+.aside h3+p+h3{margin-top:16px}
+
+/* Offer: three steps, a real sequence */
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:32px;margin-top:24px;counter-reset:step}
+.steps > div{border-top:2px solid var(--ink);padding-top:14px}
+.steps .when{font-family:var(--sans);font-size:14px;color:var(--muted)}
+.steps h3{margin-top:4px}
+.steps p{font-size:17px;margin-top:6px}
+.steps p.bound{font-size:15px;color:var(--muted)}
+
+/* Chart */
+.chart{margin-top:28px;position:relative}
+.chart .scroll svg{width:100%;height:auto;min-width:620px;display:block}
+.chart .scroll{overflow-x:auto}
+.chart .grid line{stroke:var(--rule);stroke-width:1}
+.chart text{font-family:var(--sans);font-size:13px;fill:var(--muted)}
+.chart text.axl{fill:var(--ink);font-size:13px}
+.chart text.lab{fill:var(--ink);font-size:12.5px}
+.legend{display:flex;gap:22px;flex-wrap:wrap;font-family:var(--sans);font-size:14px;color:var(--muted);margin-bottom:10px}
+.legend span{display:inline-flex;align-items:center;gap:8px}
+.tip{position:absolute;pointer-events:none;background:#fff;border:1px solid var(--rule);padding:8px 10px;font-family:var(--sans);font-size:13px;line-height:1.45;border-radius:4px;max-width:240px;box-shadow:0 2px 8px rgba(23,33,43,.08)}
+
+/* Papers list */
+.paper{display:grid;grid-template-columns:1.2fr 1fr;gap:36px;align-items:start;padding:36px 0;border-bottom:1px solid var(--rule)}
+.paper:first-of-type{margin-top:28px;border-top:1px solid var(--rule)}
+.paper .meta{font-family:var(--sans);font-size:14px;color:var(--muted)}
+.paper h2{font-size:25px;margin:6px 0 8px}
+.paper h2 a{color:var(--ink);text-decoration:none}
+.paper h2 a:hover{text-decoration:underline}
+.paper img{border-radius:6px;width:100%;height:auto}
+
+@media (max-width:760px){
+  .notes,.method,.steps,.paper{grid-template-columns:1fr;gap:18px}
+  .case{padding-top:52px}
+  .case + .case{margin-top:52px}
+  .page-head{padding-top:40px}
+}
