@@ -1,28 +1,90 @@
 <!DOCTYPE html>
-<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Analytic Sensitivities · ManifoldsX</title><meta name="author" content="Yosi BZ">
-<meta name="description" content="Validated analytic trajectory sensitivities for spring and bushing parameters. Explore results, supported scope and an invitation to evaluate ManifoldsX.">
-<meta property="og:title" content="Analytic Sensitivities · ManifoldsX"><meta property="og:description" content="Understand how stiffness and damping affect mechanism motion and loads. Review the evidence and request an example."><meta property="og:type" content="website">
-<link rel="canonical" href="https://manifoldsx.github.io/differentiable-dynamics/"><link rel="stylesheet" href="../papers/style.css">
-</head><body><a class="skip" href="#main">Skip to content</a>
-<nav aria-label="Main navigation"><a class="brand" href="../">Manifolds<span>X</span></a><div class="navlinks"><a href="../">Home</a><a href="../examples/">Examples</a><a href="../stewart-benchmark/">Benchmark</a><a href="../papers/">Papers</a><a href="#evaluate">Request an example</a></div></nav>
-<main id="main"><header class="hero"><div class="eyebrow">Differentiable dynamics · By Yosi BZ</div><h1>How does your mechanism respond to change?</h1><p class="lead">Analytic sensitivities connect spring and bushing stiffness or damping to motion and joint loads throughout a simulated trajectory.</p><div class="actions"><a class="button" href="#evaluate">Request an evaluation example</a><a href="#evidence">Review the evidence</a></div></header>
-<section class="case"><div class="eyebrow">Engineering questions</div><h2>Make parameter effects visible.</h2><div class="details">
-<div class="detail"><h3>Understand compliance</h3><p>Quantify how a supported stiffness or damping coefficient changes displacement, velocity, acceleration and reactions.</p></div>
-<div class="detail"><h3>Explore calibration and design</h3><p>Use gradients as building blocks for parameter fitting and design studies. An application-specific fitting or optimization workflow still needs to be built and validated.</p></div></div></section>
-<section class="case" id="evidence"><div class="eyebrow">Numerical evidence</div><h2>Checked from initialization to trajectory.</h2><p class="lead">The forward path differentiates consistent initialization, the implicit HHT step and the rotation update. The results below describe numerical derivative checks, not physical hardware accuracy.</p>
-<div class="metrics"><table><caption>Validation at solver revision b6e19fc</caption><thead><tr><th scope="col">Study</th><th scope="col">Evidence</th><th scope="col">Details</th></tr></thead><tbody>
-<tr><td>Spring stiffness and damping</td><td>Analytic trajectory derivatives; independent finite-difference comparisons and term-by-term tangent checks.</td><td>Spring study (on request)</td></tr>
-<tr><td>6D bushings</td><td>All 12 diagonal coefficients; 24 trajectories of 30 seconds on grounded and moving-parent connections.</td><td>Bushing validation (on request)</td></tr>
-<tr><td>Bushing motion derivatives</td><td>Worst sampled error / peak reference norm: 1.11×10⁻⁷ for position/rotation and 2.37×10⁻⁷ for velocity.</td><td>Recorded results (on request)</td></tr>
-<tr><td>Bushing acceleration and loads</td><td>The same metric: 3.80×10⁻⁵ for acceleration, 5.47×10⁻⁵ for multipliers and 5.46×10⁻⁵ for generalized reaction.</td><td>Metric and references (on request)</td></tr>
-<tr><td>Sparse sensitivity solve</td><td>Damped-chain scaling tests up to 500 links. One symbolic pattern analysis per run.</td><td>Scaling study (on request)</td></tr>
-</tbody></table></div>
-<p class="note">Bushing error metrics are normalized by the peak reference norm over sampled times, not per-component relative errors at every instant. The analytic validation runs used zero sensitivity finite-difference residual evaluations; independent perturbed simulations supplied the reference. The nominal trajectory was bitwise unchanged by sensitivity evaluation in the recorded bushing tests.</p></section>
-<section class="case"><div class="eyebrow">Choose a suitable evaluation</div><h2>Clear scope. Useful feedback.</h2><div class="details">
-<div class="detail"><h3>Available today</h3><p>Forward sensitivities for supported spring stiffness/damping and 12 diagonal bushing coefficients. One scalar parameter per sensitivity instance; bushing support is opt-in. The documented trajectory studies use ordinary index-3 HHT with full-rank supported constraints and parameter-independent initial pose and velocity.</p></div>
-<div class="detail"><h3>Discuss before using</h3><p>Contact, controllers/runtime loads, rank-changing or redundant constraints, projection and other integrators are outside the validated analytic trajectory scope. The timestep-shift correction does not differentiate adaptive decisions. A Stewart motion benchmark does not establish differentiability of that entire model.</p></div></div>
-<p class="note" style="margin-top:20px">Evidence is pinned to a reviewed solver revision. The spring README contains historical development notes; the bushing trajectory report documents the later bushing extension.</p></section>
-<section class="case"><h2>Also explore closed-loop mechanism simulation.</h2><p>See the double-Stewart animation, numerical pose checks and reproduction package. This is separate evidence for constrained mechanism simulation.</p><div class="actions"><a class="button" href="../stewart-benchmark/">Double-Stewart benchmark →</a><a href="../examples/">Simulation gallery</a></div></section>
-<section class="contact" id="evaluate"><div class="eyebrow">Early evaluation</div><h2>Try a case. Tell us what is useful.</h2><p>We are looking for engineers and researchers who want to evaluate a focused mechanism example or challenge the numerical results.</p><ol><li>Describe your mechanism and the engineering question.</li><li>Tell us which outputs matter, your current tools and your operating system.</li><li>We will discuss a suitable example and the available way to run it, then ask for feedback on setup, results and missing capabilities.</li></ol><p>Start with a non-confidential description. No model upload is required to begin the conversation.</p><a class="button" href="mailto:manifoldsx.eng@gmail.com?subject=ManifoldsX%20sensitivity%20evaluation">Request an example by email</a><p style="margin-top:18px"><a href="mailto:manifoldsx.eng@gmail.com">manifoldsx.eng@gmail.com</a></p></section>
-</main><footer>ManifoldsX · Independent multibody dynamics research · Yosi BZ · © 2026</footer></body></html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Parameter sensitivities – ManifoldsX</title>
+<meta name="description" content="Analytic trajectory sensitivities for spring and bushing parameters in ManifoldsX: what they are for, how they are checked and what they cover.">
+<meta name="author" content="Yosi BZ">
+<link rel="canonical" href="https://manifoldsx.github.io/differentiable-dynamics/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="ManifoldsX">
+<meta property="og:title" content="Parameter sensitivities – ManifoldsX">
+<meta property="og:description" content="Analytic trajectory sensitivities for spring and bushing parameters in ManifoldsX: what they are for, how they are checked and what they cover.">
+<meta property="og:url" content="https://manifoldsx.github.io/differentiable-dynamics/">
+<meta name="twitter:card" content="summary">
+<link rel="preload" href="../assets/fonts/source-serif-4.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="../assets/site.css">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="../">ManifoldsX</a>
+    <nav class="site-nav" aria-label="Main">
+      <a href="../#results">Results</a>
+      <a href="../examples/">Gallery</a>
+      <a href="../papers/">Papers</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <section class="page-head">
+    <h1>Parameter sensitivities</h1>
+    <p class="lead">How motion and joint loads change with spring and bushing stiffness and damping, computed analytically along the whole trajectory.</p>
+  </section>
+
+  <section class="section">
+    <h2>What they are for</h2>
+    <div class="notes">
+      <div><h3>Understanding compliance</h3><p>How a stiffness or damping coefficient changes displacement, velocity, acceleration and reaction forces at every instant.</p></div>
+      <div><h3>Calibration and design</h3><p>Gradients are the building blocks for parameter fitting and design studies. A fitting or optimization workflow for a given application still has to be built and validated.</p></div>
+    </div>
+  </section>
+
+  <section class="section" id="evidence">
+    <h2>How they are checked</h2>
+    <p>The derivatives cover consistent initialization, the implicit HHT step and the rotation update. Each is compared with independent perturbed simulations. These are numerical checks; they say nothing about hardware accuracy.</p>
+    <div class="table-wrap">
+      <table class="data">
+        <caption>Validation at solver revision b6e19fc</caption>
+        <thead><tr><th scope="col">Study</th><th scope="col">Evidence</th></tr></thead>
+        <tbody>
+          <tr><td>Spring stiffness and damping</td><td>Analytic trajectory derivatives, compared with finite differences over 30-second runs, plus term-by-term tangent checks.</td></tr>
+          <tr><td>6D bushings</td><td>All 12 diagonal coefficients; 24 trajectories of 30 seconds on grounded and moving-parent connections.</td></tr>
+          <tr><td>Bushing motion derivatives</td><td>Worst sampled error relative to the peak reference: 1.1&times;10<sup>&minus;7</sup> for position and rotation, 2.4&times;10<sup>&minus;7</sup> for velocity.</td></tr>
+          <tr><td>Bushing accelerations and loads</td><td>Same metric: about 5&times;10<sup>&minus;5</sup> for acceleration, multipliers and reactions, limited by the reference rather than the derivatives.</td></tr>
+          <tr><td>Sparse sensitivity solve</td><td>Damped chains up to 500 links, with one symbolic pattern analysis per run.</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="note">Errors are normalized by the peak reference value over the sampled times, not per component at every instant. In the bushing tests, computing sensitivities left the nominal trajectory bit-for-bit unchanged. Detailed reports for each study are available on request.</p>
+  </section>
+
+  <section class="section">
+    <h2>Scope</h2>
+    <div class="notes">
+      <div><h3>Covered today</h3><p>Forward sensitivities for spring stiffness and damping and the 12 diagonal bushing coefficients, one parameter at a time, with index-3 HHT and full-rank revolute, spherical and translational joints.</p></div>
+      <div><h3>Not covered yet</h3><p>Contact, controllers and runtime loads, redundant or rank-changing constraints, projection and other integrators. Adaptive step decisions are not differentiated.</p></div>
+    </div>
+  </section>
+
+  <section class="section contact" id="contact">
+    <h2>Have a parameter question?</h2>
+    <p>Send a short description of the mechanism and the parameters that matter. A written feasibility note is free. If it fits, a small paid pilot answers one engineering question with a short report.</p>
+    <a class="email" href="mailto:manifoldsx.eng@gmail.com?subject=ManifoldsX%20sensitivities">manifoldsx.eng@gmail.com</a>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <span>ManifoldsX, by Yosi BZ, 2026</span>
+  </div>
+</footer>
+
+</body>
+</html>
