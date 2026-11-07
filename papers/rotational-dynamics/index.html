@@ -48,7 +48,7 @@
       <figcaption>12 simulated seconds, normal speed.</figcaption>
     </figure>
     <h3 style="margin-top:24px">What was checked</h3>
-    <p style="margin-top:6px">Energy, angular momentum about the outer hinge and the rotor's axial spin should stay constant. Halving the time step changes the orientation of any body by at most 8.4&times;10<sup>&minus;11</sup> rad.</p>
+    <p style="margin-top:6px">Energy, angular momentum about the outer hinge and the rotor's spin stay constant. Halving the step barely changes the motion.</p>
   </article>
 
   <article class="case" id="top">
@@ -59,7 +59,7 @@
       <figcaption>First 6 simulated seconds, half speed.</figcaption>
     </figure>
     <h3 style="margin-top:24px">What was checked</h3>
-    <p style="margin-top:6px">The full orientation is compared with the exact steady-precession solution. At a 1 ms step the largest error is 3.7&times;10<sup>&minus;8</sup> rad; halving the step reduces it about 31 times.</p>
+    <p style="margin-top:6px">The orientation matches the exact steady-precession solution, and the error falls quickly as the step shrinks.</p>
   </article>
 
   <article class="case" id="tumble">
@@ -70,25 +70,14 @@
       <figcaption>12 simulated seconds, normal speed.</figcaption>
     </figure>
     <h3 style="margin-top:24px">What was checked</h3>
-    <p style="margin-top:6px">The simulation captures four reversals in 12 seconds. Its angular velocity agrees with the analytical Euler-top solution to within 1.6&times;10<sup>&minus;9</sup> rad/s at the sampled times.</p>
+    <p style="margin-top:6px">All four flips in 12 seconds match the analytical solution.</p>
   </article>
 
-  <section class="section" id="steps">
-    <h2>What changes with the time step?</h2>
-    <div class="table-wrap">
-      <table class="data" style="max-width:640px">
-        <caption>Largest sampled error against the analytical solution over 12 seconds</caption>
-        <thead><tr><th scope="col">Step</th><th scope="col" class="num">Top orientation (rad)</th><th scope="col" class="num">Tumble angular velocity (rad/s)</th></tr></thead>
-        <tbody>
-          <tr><td>1 ms</td><td class="num">3.7&times;10<sup>&minus;8</sup></td><td class="num">1.6&times;10<sup>&minus;9</sup></td></tr>
-          <tr><td>0.5 ms</td><td class="num">1.2&times;10<sup>&minus;9</sup></td><td class="num">1.3&times;10<sup>&minus;9</sup></td></tr>
-          <tr><td>0.25 ms</td><td class="num">3.8&times;10<sup>&minus;11</sup></td><td class="num">4.9&times;10<sup>&minus;9</sup></td></tr>
-        </tbody>
-      </table>
-    </div>
-    <p style="margin-top:18px">The top shows the expected fifth-order fall in error. The tumbling body stays within a few billionths of a radian per second; smaller steps do not consistently improve it.</p>
-    <p class="note">All runs use HEDOP5 with position and velocity projection. The top is checked every step and the tumbling body every 5 ms. The report gives the full settings, parameters and reference methods.</p>
-    <div class="links"><a href="ManifoldsX_Three_Rotational_Studies.pdf">Report (PDF, 5 pages)</a></div>
+  <section class="section" id="report">
+    <h2>The full report</h2>
+    <p>Models, parameters, analytical comparisons, conservation checks and step refinement.</p>
+    <div class="links"><a class="button" href="ManifoldsX_Three_Rotational_Studies.pdf">Full report (PDF)</a></div>
+    <p class="note">5 pages.</p>
   </section>
 
   <section class="section contact" id="contact">
