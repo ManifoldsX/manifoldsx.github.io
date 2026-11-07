@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Double Stewart Benchmark · ManifoldsX</title>
-<meta name="description" content="A reproducible benchmark: a two-stage Stewart platform driven by its leg lengths, with ManifoldsX and a MuJoCo model scored against forward kinematics. Method, settings, cost, limits and the full package.">
+<meta name="description" content="A benchmark: a two-stage Stewart platform driven by its leg lengths, with ManifoldsX and a MuJoCo model scored against forward kinematics. Method, settings, cost and limits.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
@@ -111,14 +111,13 @@ a:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
     <a href="#result">Result</a>
     <a href="#method">Method</a>
     <a href="#limits">Limits</a>
-    <a href="#reproduce">Reproduce</a>
     <a href="#work" class="nav-cta">Work with me</a>
   </div>
 </nav>
 
 <main class="wrap">
   <section class="hero">
-    <div class="tag">Benchmark · reproducible</div>
+    <div class="tag">Benchmark</div>
     <h1>Two-stage Stewart platform: exact loop closure, checked against forward kinematics</h1>
     <p class="lede">A two-stage Stewart platform driven by its 12 leg lengths for 18 s. With every joint satisfied, each platform's pose is pure geometry, so the exact answer is known without running any dynamics. This page scores ManifoldsX and a MuJoCo model of the same mechanism against that answer, and gives you everything needed to check it.</p>
     <video autoplay muted loop playsinline preload="metadata" aria-label="The two-stage Stewart platform in motion">
@@ -220,20 +219,9 @@ a:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
     </div>
   </section>
 
-  <section id="reproduce">
+  <section id="data">
     <div class="tag">Benchmark data</div>
-    <h2>Download the benchmark data</h2>
-    <p class="dim">The package includes the models, saved results and scripts to rerun the MuJoCo comparison and check both solvers’ trajectories. Running ManifoldsX requires the solver separately.</p>
-    <a class="btn" href="double_stewart_benchmark.zip" download>Download the package (zip, 11 MB)</a>
-<pre>pip install mujoco==3.15.0 numpy scipy
-cd double_stewart_benchmark/mujoco
-../run_all.sh            # MuJoCo rows; saved ManifoldsX run scored against forward kinematics
-
-# score any trajectory, from either solver, against forward kinematics
-python3 ../reference/fk_reference.py ../results/mx_accurate_traj.csv
-python3 mj_stewart.py 0.001 implicitfast 0.002 1e8 18 mj_1ms.csv
-python3 ../reference/fk_reference.py mj_1ms.csv</pre>
-    <p class="small note"><code>run_all.sh</code> builds the C stepping loop with gcc. Timings vary about ±10% between runs on one machine.</p>
+    <p class="dim">The models, saved results and scoring scripts are available on request.</p>
   </section>
 
   <section id="work">
