@@ -246,3 +246,21 @@ table.data tr.own td:first-child{font-weight:600}
 .also.tight{margin-top:16px}
 @media (max-width:760px){.reel .second{grid-template-columns:1fr;gap:10px}}
 .hero h1{max-width:21em;text-wrap:balance}
+
+/* ---------- Overview ---------- */
+.overview-text{padding-top:28px}
+.overview-text p{font-size:19px}
+.overview-text p:first-of-type{color:var(--ink)}
+.contains{display:grid;grid-template-columns:200px 1fr;gap:0 28px;margin-top:20px;max-width:860px}
+.contains dt,.contains dd{padding:14px 0;border-bottom:1px solid var(--rule)}
+.contains dt{font-family:var(--sans);font-weight:500;font-size:16px}
+.contains dd{font-size:18px;color:var(--muted)}
+.apps{margin-top:18px;columns:2;column-gap:44px;max-width:860px;padding-left:1.1em;font-size:18px}
+.apps li{break-inside:avoid;margin-bottom:10px}
+@media (max-width:760px){
+  .contains{grid-template-columns:1fr}
+  .contains dt{border-bottom:0;padding-bottom:2px}
+  .contains dd{padding-top:0}
+  .apps{columns:1}
+}
+@media (max-width:760px){.site-header .wrap{row-gap:8px}}
