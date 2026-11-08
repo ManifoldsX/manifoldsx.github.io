@@ -62,7 +62,7 @@
 
   <section class="section" id="evidence">
     <h2>Benchmarks and validation</h2>
-    <p>Compare simulation results with analytical solutions. Each benchmark includes the model, solver settings, and reference results.</p>
+    <p>Compare simulation results with exact solutions. Each benchmark includes the model, solver settings, and reference results.</p>
 
     <div class="proof-text">
       <h3>Closed-loop accuracy</h3>
@@ -77,12 +77,12 @@
       <p class="links"><a href="stewart-benchmark/">Benchmark</a><a href="stewart-benchmark/double_stewart_reproduction.zip">Reproduction package (zip, 11&nbsp;MB)</a></p>
     </div>
 
-    <div class="calib" id="sensitivity"><h3>Differentiable physics</h3><p>Use analytic gradients to calibrate models, optimize designs, and identify the parameters that matter most.</p><p><a href="differentiable-dynamics/">Explore parameter sensitivities</a></p></div>
-    <div class="also tight"><h3>Long-duration accuracy</h3><p>Ten classical dynamics problems simulated for 1,000 seconds each and compared with analytical solutions.</p><a href="papers/">View the validation report</a></div>
+    <div class="calib" id="sensitivity"><h3>Differentiable physics</h3><p>Use analytic gradients to calibrate models, optimize designs, and identify the parameters that matter most. Example: a spring of unknown stiffness is recovered from a noisy measured motion in three runs. The misfit drops from 21&nbsp;mm to the 0.5&nbsp;mm noise level, and the stiffness lands within 2&times;10<sup>&minus;5</sup>&nbsp;N/m of the true 226&nbsp;N/m.</p><figure class="figure"><img src="examples/media/calibration.svg" alt="Model minus measured tip position over 6 seconds for three runs: about 21 mm misfit, then 2.6 mm, then 0.48 mm, the noise level"><figcaption>The &ldquo;measured&rdquo; motion is a simulation at 226&nbsp;N/m with 0.5&nbsp;mm of random noise added, so the true answer is known. One Gauss&ndash;Newton step per run.</figcaption></figure><p><a href="differentiable-dynamics/">Explore parameter sensitivities</a></p></div>
+    <div class="also tight"><h3>Long-duration accuracy</h3><p>Ten classical dynamics problems simulated for 1,000 seconds each and compared with exact or independently checked solutions.</p><a href="papers/">View the validation report</a></div>
   </section>
 
   <section class="section" id="workflow"><h2>Build, simulate, analyze.</h2><div class="steps">
-<div><span class="when">1</span><h3>Build</h3><p>Create your model in the web-based ManifoldsX Studio, a JSON file, or through the C++ and Python APIs.</p></div>
+<div><span class="when">1</span><h3>Build</h3><p>Create your model in the web-based ManifoldsX Studio, a JSON file, or through the C++ API (Python bindings on request).</p></div>
 <div><span class="when">2</span><h3>Simulate</h3><p>Run the model with fixed or adaptive time steps.</p></div>
 <div><span class="when">3</span><h3>Analyze</h3><p>Explore motion, forces, and parameter sensitivities.</p></div>
 </div></section>
