@@ -3,13 +3,13 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>ManifoldsX – accurate motion and loads for robots and machines</title>
+<title>ManifoldsX – accurate, differentiable simulation for robots and machines</title>
 <meta name="description" content="ManifoldsX is a multibody solver for engineers who design robots, parallel platforms and machines with flexible parts. Start with a simulation pilot: one mechanism, one question, a report you can check.">
 <meta name="author" content="Yosi BZ">
 <link rel="canonical" href="https://manifoldsx.github.io/">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="ManifoldsX">
-<meta property="og:title" content="ManifoldsX – accurate motion and loads for robots and machines">
+<meta property="og:title" content="ManifoldsX – accurate, differentiable simulation for robots and machines">
 <meta property="og:description" content="A multibody solver for robots, parallel platforms and machines with flexible parts. Start with a simulation pilot.">
 <meta property="og:url" content="https://manifoldsx.github.io/">
 <meta name="twitter:card" content="summary">
@@ -34,7 +34,7 @@
 
   <section class="hero">
     <p class="eyebrow">Multibody simulation</p>
-    <h1>Accurate motion and loads for robots and machines.</h1>
+    <h1>Accurate, differentiable simulation for robots and machines.</h1>
     <p class="lead">ManifoldsX is a multibody solver for engineers who design robots, parallel platforms and machines with flexible parts. It computes the motion, the loads in every joint and actuator, and how both change with your design parameters. Today it is offered through simulation pilots: bring one mechanism and one question, and get a report you can check.</p>
     <div class="actions">
       <a class="button" href="mailto:manifoldsx.eng@gmail.com?subject=Simulation%20pilot&amp;body=Mechanism%3A%0D%0A%0D%0AThe%20question%20you%20need%20answered%3A%0D%0A%0D%0AWhat%20you%20have%20(CAD%2C%20masses%2C%20motion%20or%20test%20data)%3A%0D%0A%0D%0ATimeline%3A%0D%0A">Discuss a simulation pilot</a>
@@ -47,12 +47,18 @@
     </div>
   </section>
 
-  <section class="reel" aria-label="Featured simulation">
+  <section class="reel" aria-label="Featured simulations">
     <div class="feature">
       <a class="clip" href="examples/#cotton">
         <video muted loop playsinline preload="none" poster="examples/media/robot_cloth.jpg" aria-label="Two robot arms moving a cotton sheet"><source src="examples/media/robot_cloth.mp4" type="video/mp4"></video>
       </a>
       <p class="caption"><b>The question:</b> when two arms move a cotton sheet, how does the sheet lag, fold and ripple? Arms and cloth are one model, so the grippers carry the sheet&rsquo;s real load. Rendered from the solver output.</p>
+    </div>
+    <div class="second">
+      <a class="clip" href="examples/#granular">
+        <video muted loop playsinline preload="none" poster="examples/media/granular_collapse.jpg" aria-label="Granular column collapsing"><source src="examples/media/granular_collapse.mp4" type="video/mp4"></video>
+      </a>
+      <p class="caption"><b>The question:</b> how does a loose material flow and settle? About 15,000 grains, each with elastic contact, friction and rolling resistance. This is the groundwork for buckets, grippers and wheels working in sand or powder.</p>
     </div>
   </section>
 
@@ -60,51 +66,26 @@
     <h2>Evidence you can check</h2>
     <p>Every claim here comes with its settings and a way to check it yourself.</p>
 
-    <div class="proof">
-      <a class="clip" href="stewart-benchmark/">
-        <video muted loop playsinline preload="none" poster="examples/media/double_stewart.jpg" aria-label="Two-stage Stewart platform"><source src="Double_Stewart.mp4" type="video/mp4"></video>
-      </a>
-      <div>
-        <h3>Closed loops that stay closed</h3>
-        <dl class="facts">
-          <dt>Model</dt><dd>Two stacked Stewart platforms, 12 driven legs, 18&nbsp;s</dd>
-          <dt>Reference</dt><dd>Exact forward kinematics from the leg lengths</dd>
-          <dt>Result</dt><dd>Both platforms within one nanometre (10<sup>&minus;9</sup>&nbsp;m) of the exact pose</dd>
-          <dt>Speed</dt><dd>About 13&times; real time on one CPU core</dd>
-          <dt>Settings</dt><dd>HHT index-3, error control at 10<sup>&minus;5</sup>, steps up to 3&nbsp;ms</dd>
-        </dl>
-        <p class="links"><a href="stewart-benchmark/">Benchmark</a><a href="stewart-benchmark/double_stewart_reproduction.zip">Reproduction package (zip, 11&nbsp;MB)</a></p>
-      </div>
+    <div class="proof-text">
+      <h3>Closed loops that stay closed</h3>
+      <dl class="facts">
+        <dt>Model</dt><dd>Two stacked Stewart platforms, 12 driven legs, 18&nbsp;s</dd>
+        <dt>Reference</dt><dd>Exact forward kinematics from the leg lengths</dd>
+        <dt>Result</dt><dd>Both platforms within one nanometre (10<sup>&minus;9</sup>&nbsp;m) of the exact pose</dd>
+        <dt>Speed</dt><dd>About 13&times; real time on one CPU core</dd>
+        <dt>Settings</dt><dd>HHT index-3, error control at 10<sup>&minus;5</sup>, steps up to 3&nbsp;ms</dd>
+      </dl>
+      <p class="links"><a href="stewart-benchmark/">Benchmark</a><a href="stewart-benchmark/double_stewart_reproduction.zip">Reproduction package (zip, 11&nbsp;MB)</a></p>
     </div>
 
-    <div class="sens" id="sensitivity">
-      <h3>Change a parameter, see the effect, from one run</h3>
-      <p>A pendulum hangs from a sliding block held by a spring of 200&nbsp;N/m. One run at that stiffness also gives the derivative of the whole motion with respect to it. Move the slider: the dashed line is the change in the pendulum tip&rsquo;s path predicted from that single run; the solid line is a full re-run at the new stiffness.</p>
-      <div class="sens-ctrl">
-        <label for="kslider">Spring stiffness</label>
-        <input id="kslider" type="range" min="0" max="8" step="1" value="6" aria-describedby="kread">
-        <output id="kval">205 N/m</output>
-      </div>
-      <div class="legend" aria-hidden="true">
-        <span><svg width="26" height="10"><line x1="0" y1="5" x2="26" y2="5" stroke="#2F6FB8" stroke-width="2"/></svg>Full re-run</span>
-        <span><svg width="26" height="10"><line x1="0" y1="5" x2="26" y2="5" stroke="#C2541F" stroke-width="2" stroke-dasharray="5 3"/></svg>Predicted from one run</span>
-      </div>
-      <div class="chart" id="senschart"><div class="scroll"></div></div>
-      <p class="readout" id="kread" aria-live="polite"></p>
-      <p class="small">The prediction is first order, so it is closest for small changes. Calibration and design optimization use exactly these derivatives, one gradient step at a time. <a href="differentiable-dynamics/">How the derivatives are computed and checked</a>.</p>
-    </div>
-
-    <p class="also">Long-run accuracy: ten classical problems, each run for 1,000 seconds against an exact answer. <a href="papers/">Read the paper</a>.</p>
+    <p class="also">Parameter sensitivities: derivatives of the motion and loads with respect to model parameters, computed analytically in the same run and checked against finite differences. <a href="differentiable-dynamics/">How they are computed and checked</a>.</p>
+    <p class="also tight">Long-run accuracy: ten classical problems, each run for 1,000 seconds against an exact answer. <a href="papers/">Read the paper</a>.</p>
   </section>
 
   <section class="section" id="workflow">
     <h2>How it works</h2>
-    <figure class="figure">
-      <video muted loop playsinline preload="none" poster="examples/media/studio_workflow.jpg" aria-label="ManifoldsX Studio: load, solve and play back a model"><source src="examples/media/studio_workflow.mp4" type="video/mp4"></video>
-      <figcaption>ManifoldsX Studio: the two-stage Stewart platform loaded from its model file, solved, and played back. Screen recording; playback sped up.</figcaption>
-    </figure>
     <div class="steps">
-      <div><span class="when">1</span><h3>Build the model</h3><p>Parts, joints, springs, bushings and motions, in Studio or as a JSON file.</p></div>
+      <div><span class="when">1</span><h3>Build the model</h3><p>Parts, joints, springs, bushings and motions, in ManifoldsX Studio (a browser editor) or as a JSON file.</p></div>
       <div><span class="when">2</span><h3>Solve</h3><p>Fixed or error-controlled steps, with every constraint held to its tolerance.</p></div>
       <div><span class="when">3</span><h3>Inspect and report</h3><p>Play back the motion; joint and actuator loads and parameter sensitivities go into the report.</p></div>
     </div>
@@ -145,59 +126,6 @@
   vids.forEach(v => io.observe(v));
 })();
 
-(async () => {
-  const KS = [190, 192.5, 195, 197.5, 200, 202.5, 205, 207.5, 210];
-  const box = document.querySelector('#senschart .scroll');
-  const slider = document.getElementById('kslider'), kval = document.getElementById('kval'), read = document.getElementById('kread');
-  let d;
-  try { d = await (await fetch('assets/data/sens_demo.json')).json(); } catch (e) { box.textContent = 'Chart data could not be loaded.'; return; }
-  const W = Math.round(Math.max(340, Math.min(720, box.clientWidth || 720))), H = W < 500 ? 260 : 300, L = 58, R = 12, T = 14, B = 42, YM = 40;
-  const t = d.t, n = t.length;
-  const X = v => L + (v / t[n - 1]) * (W - L - R);
-  const Y = v => T + (1 - (v + YM) / (2 * YM)) * (H - T - B);
-  const NS = 'http://www.w3.org/2000/svg';
-  const el = (name, attrs, parent) => { const e = document.createElementNS(NS, name); for (const k in attrs) e.setAttribute(k, attrs[k]); if (parent) parent.appendChild(e); return e; };
-  const svg = el('svg', { viewBox: `0 0 ${W} ${H}`, role: 'img', 'aria-label': 'Change in pendulum tip position over 6 seconds: full re-run and one-run prediction' });
-  const g = el('g', { class: 'grid' }, svg);
-  for (let v = -40; v <= 40; v += 20) {
-    el('line', { x1: L, x2: W - R, y1: Y(v), y2: Y(v), stroke: v === 0 ? '#9AA5AF' : null }, g);
-    const tx = el('text', { x: L - 8, y: Y(v) + 4, 'text-anchor': 'end' }, svg); tx.textContent = (v > 0 ? '+' : '') + v;
-  }
-  for (let s = 0; s <= 6; s += (W < 500 ? 2 : 1)) { const tx = el('text', { x: X(s), y: H - B + 18, 'text-anchor': 'middle' }, svg); tx.textContent = s; }
-  const xl = el('text', { x: (L + W - R) / 2, y: H - 6, 'text-anchor': 'middle', class: 'axl' }, svg); xl.textContent = 'Time (s)';
-  const yl = el('text', { x: 14, y: (T + H - B) / 2, 'text-anchor': 'middle', class: 'axl', transform: `rotate(-90 14 ${(T + H - B) / 2})` }, svg); yl.textContent = W < 500 ? 'Tip change (mm)' : 'Change in tip position (mm)';
-  const runP = el('path', { fill: 'none', stroke: '#2F6FB8', 'stroke-width': 2, 'stroke-linejoin': 'round' }, svg);
-  const preP = el('path', { fill: 'none', stroke: '#C2541F', 'stroke-width': 2, 'stroke-dasharray': '6 4', 'stroke-linejoin': 'round' }, svg);
-  const cross = el('line', { y1: T, y2: H - B, stroke: '#566472', 'stroke-width': 1, visibility: 'hidden' }, svg);
-  const hit = el('rect', { x: L, y: T, width: W - L - R, height: H - T - B, fill: 'transparent' }, svg);
-  box.appendChild(svg);
-  const tip = document.createElement('div'); tip.className = 'tip'; tip.style.display = 'none'; document.getElementById('senschart').appendChild(tip);
-  let run = [], pre = [], k = 205;
-  const path = arr => arr.map((v, i) => (i ? 'L' : 'M') + X(t[i]).toFixed(1) + ' ' + Y(v).toFixed(1)).join('');
-  const draw = () => {
-    k = KS[+slider.value]; const dk = k - 200, key = String(k);
-    run = d.runs[key].map((v, i) => 1000 * (v - d.nominal[i]));
-    pre = d.grad.map(gv => 1000 * gv * dk);
-    runP.setAttribute('d', path(run)); preP.setAttribute('d', path(pre));
-    const pct = (100 * dk / 200).toFixed(2).replace(/\.?0+$/, '');
-    kval.textContent = `${key} N/m` + (dk ? ` (${dk > 0 ? '+' : ''}${pct} %)` : '');
-    if (!dk) { read.textContent = 'At 200 N/m there is no change. Move the slider.'; return; }
-    const moved = Math.max(...run.map(Math.abs)), gap = Math.max(...run.map((v, i) => Math.abs(v - pre[i])));
-    read.textContent = `The tip moves up to ${moved.toFixed(0)} mm. The one-run prediction stays within ${gap < 1 ? gap.toFixed(2) : gap.toFixed(1)} mm of the full re-run.`;
-  };
-  slider.addEventListener('input', draw); draw();
-  hit.addEventListener('pointermove', ev => {
-    const r = svg.getBoundingClientRect(), sx = (ev.clientX - r.left) * W / r.width;
-    const i = Math.max(0, Math.min(n - 1, Math.round(((sx - L) / (W - L - R)) * (n - 1))));
-    cross.setAttribute('x1', X(t[i])); cross.setAttribute('x2', X(t[i])); cross.setAttribute('visibility', 'visible');
-    tip.innerHTML = `<b>${t[i].toFixed(2)} s</b><br>Full re-run: ${run[i].toFixed(1)} mm<br>Predicted: ${pre[i].toFixed(1)} mm`;
-    tip.style.display = 'block';
-    const cr = document.getElementById('senschart').getBoundingClientRect();
-    let left = ev.clientX - cr.left + 14; if (left > cr.width - 180) left -= 200;
-    tip.style.left = left + 'px'; tip.style.top = (ev.clientY - cr.top - 10) + 'px';
-  });
-  hit.addEventListener('pointerleave', () => { tip.style.display = 'none'; cross.setAttribute('visibility', 'hidden'); });
-})();
 </script>
 </body>
 </html>
