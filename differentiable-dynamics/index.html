@@ -4,12 +4,12 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Parameter sensitivities – ManifoldsX</title>
-<meta name="description" content="Analytic trajectory sensitivities for spring and bushing parameters in ManifoldsX: what they are for, how they are checked and what they cover.">
+<meta name="description" content="Analytic trajectory sensitivities in ManifoldsX: a robot joint-stiffness case study, how the gradients are checked and what they cover.">
 <link rel="canonical" href="https://manifoldsx.github.io/differentiable-dynamics/">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="ManifoldsX">
 <meta property="og:title" content="Parameter sensitivities – ManifoldsX">
-<meta property="og:description" content="Analytic trajectory sensitivities for spring and bushing parameters in ManifoldsX: what they are for, how they are checked and what they cover.">
+<meta property="og:description" content="Analytic trajectory sensitivities in ManifoldsX: a robot joint-stiffness case study, how the gradients are checked and what they cover.">
 <meta property="og:url" content="https://manifoldsx.github.io/differentiable-dynamics/">
 <meta name="twitter:card" content="summary">
 <link rel="preload" href="../assets/fonts/source-serif-4.woff2" as="font" type="font/woff2" crossorigin>
@@ -45,29 +45,41 @@
     <h2>What they are for</h2>
     <div class="notes">
       <div><h3>Understanding compliance</h3><p>How a stiffness or damping coefficient changes displacement, velocity, acceleration and reaction forces at every instant.</p></div>
-      <div><h3>Calibration and design</h3><p>Gradients are the building blocks for parameter fitting and design studies. A fitting or optimization workflow for a given application still has to be built and validated.</p></div>
+      <div><h3>Calibration and design</h3><p>Gradients are the building blocks for parameter fitting and design studies. The robot case below is a complete fit on simulated data; a fit to a real machine still has to be checked against its measurements.</p></div>
     </div>
+  </section>
+
+  <section class="section" id="robot">
+    <h2>Case study: joint stiffness of a robot arm</h2>
+    <p>A robot arm is not rigid. Its joints twist under the weight of the arm and the tool, so the tool ends up millimetres from where the controller puts it. For drilling, machining or any task that needs absolute accuracy, that gap matters. Robot makers rarely publish joint stiffness, and a gear catalogue value is not the stiffness of the whole joint.</p>
+    <p>One joint is especially hard to measure. The base turns about a vertical axis, so gravity puts no load on it and a static test cannot see its stiffness. Only the inertial loads of a moving arm reveal it.</p>
+    <p>Here a 7-joint arm carries a 3&nbsp;kg tool mounted to one side and runs a single 8-second motion of all joints. A laser tracker records the tool point at 100 times a second with 20&nbsp;µm noise. Starting from catalogue values that are up to almost three times too stiff, a gradient-based fit recovers all seven joint stiffnesses in two iterations, each one simulation with its gradients.</p>
+    <figure class="figure"><picture><source media="(max-width: 600px)" srcset="../examples/media/robot_stiffness_fit_phone.svg"><img src="../examples/media/robot_stiffness_fit.svg" alt="Tool sag below the commanded path: tracker data, the model with catalogue stiffness and the model with identified stiffness" loading="lazy" style="width:100%;height:auto;background:#fff;border-radius:6px;padding:10px 8px"></picture><figcaption>The tool sags 1 to 4&nbsp;mm below its commanded path. With catalogue stiffness the model misses by about 1&nbsp;mm; with the identified stiffness it follows the tracker data.</figcaption></figure>
+    <figure class="figure"><picture><source media="(max-width: 600px)" srcset="../examples/media/robot_stiffness_joints_phone.svg"><img src="../examples/media/robot_stiffness_joints.svg" alt="Joint stiffness for each of the seven joints: catalogue start, identified value and true value" loading="lazy" style="width:100%;height:auto;background:#fff;border-radius:6px;padding:10px 8px"></picture><figcaption>Each joint: catalogue start, identified value and true value. All seven land within 3% of the true value; the spread is the tracker noise.</figcaption></figure>
+    <figure class="figure"><picture><source media="(max-width: 600px)" srcset="../examples/media/robot_stiffness_validation_phone.svg"><img src="../examples/media/robot_stiffness_validation.svg" alt="Tool-point error on a new motion for rigid kinematics, catalogue stiffness and identified stiffness" loading="lazy" style="width:100%;height:auto;background:#fff;border-radius:6px;padding:10px 8px"></picture><figcaption>On a motion the fit never saw, the tool error drops from about 3&nbsp;mm with rigid kinematics and 1&nbsp;mm with catalogue stiffness to about 2&nbsp;µm with the identified stiffness, below the noise of the data it was fitted to.</figcaption></figure>
+    <p class="note">The test data are simulated from the same model, with tracker noise added, and joint damping is taken as known. A real arm adds friction, backlash and link flexibility, which a model for measured data would have to include.</p>
   </section>
 
   <section class="section" id="evidence">
     <h2>How they are checked</h2>
     <p>Each derivative is compared with independent perturbed simulations over 30-second runs, for springs and for all 12 bushing coefficients. For motion they agree to about one part in ten million of the peak response.</p>
+    <p>For the robot arm, including its motor-driven joints, the gradients agree with perturbed runs to a few parts in a million, the accuracy of the perturbed runs themselves.</p>
     <p>These are numerical checks of the derivatives. They say nothing about hardware accuracy.</p>
   </section>
 
   <section class="section">
     <h2>Scope</h2>
     <div class="notes">
-      <div><h3>Covered today</h3><p>Spring stiffness and damping and the 12 diagonal bushing coefficients, with revolute, spherical and translational joints.</p></div>
-      <div><h3>Not covered yet</h3><p>Contact, controllers, redundant constraints and adaptive step decisions.</p></div>
+      <div><h3>Covered today</h3><p>Spring stiffness and damping and the 12 diagonal bushing coefficients, with revolute, spherical and translational joints and motor-driven rotary joints.</p></div>
+      <div><h3>Not covered yet</h3><p>Other prescribed motions, contact, controllers, redundant constraints and adaptive step decisions.</p></div>
     </div>
     <div class="links"><a class="button" href="ManifoldsX_Parameter_Sensitivities.pdf">Full report (PDF)</a></div>
-    <p class="note">Validation tables, metrics and full scope. 2 pages.</p>
+    <p class="note">Validation tables, the robot case in full and the scope. 6 pages.</p>
   </section>
 
 <section class="section contact" id="contact">
     <h2>Have a parameter question?</h2>
-    <p>Send a short description of the mechanism and the parameters that matter. A written feasibility note is free. If it fits, a small paid pilot answers one engineering question with a short report.</p>
+    <p>Send a short description of the mechanism and the parameters that matter. You’ll get a written note on whether ManifoldsX fits and what a pilot study would involve.</p>
     <a class="email" href="mailto:manifoldsx.eng@gmail.com?subject=ManifoldsX%20sensitivities">manifoldsx.eng@gmail.com</a>
   </section>
 
