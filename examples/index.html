@@ -4,13 +4,13 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Simulation gallery – ManifoldsX</title>
-<meta name="description" content="Three mechanisms simulated with ManifoldsX: a two-stage Stewart platform, a 100-link chain and a Stewart platform.">
+<meta name="description" content="Mechanisms simulated with ManifoldsX: Stewart platforms, a 100-link chain, a gyroscope, a spinning top, a tumbling body, a Newton's cradle, a deploying solar panel and a mini excavator.">
 <meta name="author" content="Yosi BZ">
 <link rel="canonical" href="https://manifoldsx.github.io/examples/">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="ManifoldsX">
 <meta property="og:title" content="Simulation gallery – ManifoldsX">
-<meta property="og:description" content="Three mechanisms simulated with ManifoldsX: a two-stage Stewart platform, a 100-link chain and a Stewart platform.">
+<meta property="og:description" content="Mechanisms simulated with ManifoldsX: Stewart platforms, a 100-link chain, a gyroscope, a spinning top, a tumbling body, a Newton's cradle, a deploying solar panel and a mini excavator.">
 <meta property="og:url" content="https://manifoldsx.github.io/examples/">
 <meta name="twitter:card" content="summary">
 <link rel="preload" href="../assets/fonts/source-serif-4.woff2" as="font" type="font/woff2" crossorigin>
@@ -34,7 +34,7 @@
 
   <section class="page-head">
     <h1>Simulation gallery</h1>
-    <p class="lead">Three mechanisms in motion, and the question each one tests.</p>
+    <p class="lead">Mechanisms in motion, and the question each one tests.</p>
   </section>
 
   <article class="case" id="double-stewart">
@@ -74,6 +74,87 @@
     <div class="notes">
       <div><h3>The question</h3><p>Do coordinated leg-length changes produce the intended platform motion with every joint closed?</p></div>
       <div><h3>Where it leads</h3><p>Positioning stages, motion platforms and actuator trajectories. The two-stage case extends the same idea.</p></div>
+    </div>
+  </article>
+
+  <article class="case" id="gyroscope">
+    <h2>Gimballed gyroscope</h2>
+    <p>A spinning rotor sits inside two free gimbals. The rotor's spin couples the motion of the two gimbals in ways that are hard to predict by eye.</p>
+    <figure>
+      <video controls muted playsinline preload="metadata" poster="../papers/rotational-dynamics/gimbal.jpg" aria-label="Gimballed gyroscope simulation"><source src="../papers/rotational-dynamics/gimbal.mp4" type="video/mp4"></video>
+      <figcaption>12 simulated seconds.</figcaption>
+    </figure>
+    <div class="notes">
+      <div><h3>The question</h3><p>Do energy, the rotor's spin and the angular momentum about the outer hinge stay constant, as they must?</p></div>
+      <div><h3>How it is checked</h3><p>Each conserved quantity is tracked over the run, and halving the time step barely changes the motion.</p></div>
+    </div>
+    <div class="links"><a href="../papers/rotational-dynamics/">Read the study</a></div>
+  </article>
+
+  <article class="case" id="top">
+    <h2>Spinning top</h2>
+    <p>The top spins about its own axis while that axis travels around the vertical. Set up for steady precession, its tilt should never change.</p>
+    <figure>
+      <video controls muted playsinline preload="metadata" poster="../papers/rotational-dynamics/top.jpg" aria-label="Spinning top simulation"><source src="../papers/rotational-dynamics/top.mp4" type="video/mp4"></video>
+      <figcaption>First 6 simulated seconds, half speed.</figcaption>
+    </figure>
+    <div class="notes">
+      <div><h3>The question</h3><p>Does the top hold steady precession, with no drift in its tilt?</p></div>
+      <div><h3>How it is checked</h3><p>The full orientation is compared with the exact steady-precession solution at every step.</p></div>
+    </div>
+    <div class="links"><a href="../papers/rotational-dynamics/">Read the study</a></div>
+  </article>
+
+  <article class="case" id="tumble">
+    <h2>Tumbling body</h2>
+    <p>A free body spun almost exactly about its middle axis of inertia flips over, again and again, with no torque acting on it.</p>
+    <figure>
+      <video controls muted playsinline preload="metadata" poster="../papers/rotational-dynamics/tumble.jpg" aria-label="Tumbling body simulation"><source src="../papers/rotational-dynamics/tumble.mp4" type="video/mp4"></video>
+      <figcaption>12 simulated seconds.</figcaption>
+    </figure>
+    <div class="notes">
+      <div><h3>The question</h3><p>Do the flips happen when the physics says they should?</p></div>
+      <div><h3>How it is checked</h3><p>The angular velocity is compared with the analytical solution for a free rigid body; all four flips line up.</p></div>
+    </div>
+    <div class="links"><a href="../papers/rotational-dynamics/">Read the study</a></div>
+  </article>
+
+  <article class="case" id="cradle">
+    <h2>Newton's cradle</h2>
+    <p>Five steel balls, 40 mm across, on hinged strings. One, two, then three balls are pulled back and released.</p>
+    <figure>
+      <video controls muted playsinline preload="metadata" poster="media/newtons_cradle.jpg" aria-label="Newton's cradle simulation"><source src="media/newtons_cradle.mp4" type="video/mp4"></video>
+      <figcaption>Three releases, 4 seconds each, real time.</figcaption>
+    </figure>
+    <div class="notes">
+      <div><h3>The question</h3><p>Does the impulse travel cleanly through the row, so the same number of balls leaves the far end?</p></div>
+      <div><h3>How it is checked</h3><p>Contacts are modelled as compliant impacts. The energy lost in them must only ever grow, never come back, and it does.</p></div>
+    </div>
+  </article>
+
+  <article class="case" id="solar-panel">
+    <h2>Solar panel deployment</h2>
+    <p>A thin aluminium panel, 1.0 by 0.6 m and 4 mm thick, swings 90 degrees on a driven hinge in 0.8 seconds and latches. A 1 kg sensor sits on one corner.</p>
+    <figure>
+      <video controls muted playsinline preload="metadata" poster="media/solar_panel.jpg" aria-label="Solar panel deployment simulation"><source src="media/solar_panel.mp4" type="video/mp4"></video>
+      <figcaption>Half speed. Colour shows how far the panel bends, up to 80 mm.</figcaption>
+    </figure>
+    <div class="notes">
+      <div><h3>The question</h3><p>How far does a thin panel bend when it latches at speed, and how long does it keep flapping?</p></div>
+      <div><h3>How it is checked</h3><p>The panel is a flexible solid (240 elements) joined to a rigid hinge. The hinge lands at exactly 90 degrees, and the same elements match the exact large-deflection beam solution to within 0.2%.</p></div>
+    </div>
+  </article>
+
+  <article class="case" id="excavator">
+    <h2>Mini excavator swinging a load</h2>
+    <p>A 1.8 t mini excavator holds 150 kg on a 1 m cable, 3.1 m out from the swing axis, and swings it 90 degrees to the side. Each track is a loop of 38 shoes in contact with the ground.</p>
+    <figure>
+      <video controls muted playsinline preload="metadata" poster="media/excavator_swing.jpg" aria-label="Mini excavator swinging a hanging load"><source src="media/excavator_swing.mp4" type="video/mp4"></video>
+      <figcaption>Real time. 100 bodies, including every track shoe.</figcaption>
+    </figure>
+    <div class="notes">
+      <div><h3>The question</h3><p>Does the machine stay planted while the load keeps swinging on its cable after the stop?</p></div>
+      <div><h3>What happens</h3><p>The load swings out to about 37 degrees on the cable; the machine tilts less than 0.2 degrees. Every joint stays closed to round-off level for the whole run.</p></div>
     </div>
   </article>
 
