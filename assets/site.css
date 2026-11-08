@@ -176,6 +176,6 @@ table.data tr.own td:first-child{font-weight:600}
 .clip video{width:100%;aspect-ratio:16/9;object-fit:cover;background:#0c1218;border-radius:6px;display:block}
 .clip span{display:block;font-family:var(--sans);font-size:15px;color:var(--muted);margin-top:8px}
 .clip:hover span{color:var(--ink)}
-.reel .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:28px 20px;margin-top:28px}
+.reel .grid{display:grid;grid-template-columns:1fr 1fr;gap:28px 24px;margin-top:28px}
 .reel .more{margin-top:28px;font-family:var(--sans);font-size:16px}
 @media (max-width:760px){.reel .grid{grid-template-columns:1fr;gap:22px}}
