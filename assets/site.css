@@ -245,3 +245,4 @@ table.data tr.own td:first-child{font-weight:600}
 .proof-text h3{font-size:22px}
 .also.tight{margin-top:16px}
 @media (max-width:760px){.reel .second{grid-template-columns:1fr;gap:10px}}
+.hero h1{max-width:21em;text-wrap:balance}
