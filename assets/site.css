@@ -269,3 +269,13 @@ table.data tr.own td:first-child{font-weight:600}
 .calib > p{margin-top:8px;color:var(--muted);font-size:18px}
 .calib .figure{margin-top:20px}
 .calib .figure img{width:100%;height:auto;background:#fff;border-radius:6px;padding:10px 8px}
+/* Hero with the cloth clip beside the headline */
+.hero-split{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.2fr);gap:44px;align-items:center}
+.hero-split h1{font-size:clamp(32px,3.6vw,44px)}
+.hero-media{margin:0}
+.hero-media figcaption{font-family:var(--sans);font-size:14px;line-height:1.5;color:var(--muted);margin-top:10px}
+.hero-media figcaption b{color:var(--ink);font-weight:500}
+.hero-sub{margin-top:40px;font-size:19px;color:var(--muted)}
+.hero-sub + .needs{margin-top:20px}
+@media (max-width:900px){.hero-split{grid-template-columns:1fr;gap:24px}}
+@media (max-width:760px){.hero-sub{margin-top:32px;font-size:18px}}
