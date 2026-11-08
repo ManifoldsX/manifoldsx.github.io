@@ -22,7 +22,6 @@
   <div class="wrap">
     <a class="brand" href="../">ManifoldsX</a>
     <nav class="site-nav" aria-label="Main">
-      <a href="../#results">Results</a>
       <a href="../examples/">Gallery</a>
       <a href="../papers/" aria-current="page">Papers</a>
       <a href="#contact">Contact</a>
@@ -36,6 +35,34 @@
     <h1>Papers and studies</h1>
     <p class="lead">The models, calculations and checks behind the animations.</p>
   </section>
+  <section class="section" id="results">
+    <h2>What has been checked</h2>
+    <p>Each case is compared with a reference that does not come from the solver.</p>
+    <table class="results">
+      <thead><tr><th scope="col">Case</th><th scope="col">Reference</th><th scope="col">Result</th><th scope="col"><span class="visually-hidden">Details</span></th></tr></thead>
+      <tbody>
+        <tr>
+          <td>Two-stage Stewart platform</td>
+          <td>Exact forward kinematics</td>
+          <td>Platform position within a micrometre over the full run. MuJoCo at a similar speed is about a tenth of a millimetre off.</td>
+          <td><a href="../stewart-benchmark/">Benchmark</a></td>
+        </tr>
+        <tr>
+          <td>Gyroscope, spinning top, tumbling body</td>
+          <td>Analytical solutions</td>
+          <td>Motion agrees with the exact solutions. Energy and momentum are conserved.</td>
+          <td><a href="rotational-dynamics/">Report</a></td>
+        </tr>
+        <tr>
+          <td>Parameter sensitivities</td>
+          <td>Finite differences</td>
+          <td>Analytic gradients of motion and joint loads for springs and bushings agree over 30-second runs.</td>
+          <td><a href="../differentiable-dynamics/">Scope</a></td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
   <section>
     <article class="paper">
       <div>

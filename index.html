@@ -3,14 +3,14 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>ManifoldsX – multibody dynamics, checked against exact references</title>
-<meta name="description" content="ManifoldsX is a C++ solver for constrained mechanisms. Each result is compared with a reference that does not come from the solver.">
+<title>ManifoldsX – simulation for machines that move</title>
+<meta name="description" content="ManifoldsX is a multibody solver for robots, mechanisms and flexible parts.">
 <meta name="author" content="Yosi BZ">
 <link rel="canonical" href="https://manifoldsx.github.io/">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="ManifoldsX">
-<meta property="og:title" content="ManifoldsX – multibody dynamics, checked against exact references">
-<meta property="og:description" content="ManifoldsX is a C++ solver for constrained mechanisms. Each result is compared with a reference that does not come from the solver.">
+<meta property="og:title" content="ManifoldsX – simulation for machines that move">
+<meta property="og:description" content="ManifoldsX is a multibody solver for robots, mechanisms and flexible parts.">
 <meta property="og:url" content="https://manifoldsx.github.io/">
 <meta name="twitter:card" content="summary">
 <link rel="preload" href="assets/fonts/source-serif-4.woff2" as="font" type="font/woff2" crossorigin>
@@ -22,7 +22,6 @@
   <div class="wrap">
     <a class="brand" href="./">ManifoldsX</a>
     <nav class="site-nav" aria-label="Main">
-      <a href="#results">Results</a>
       <a href="examples/">Gallery</a>
       <a href="papers/">Papers</a>
       <a href="#contact">Contact</a>
@@ -33,60 +32,37 @@
 <main class="wrap">
 
   <section class="hero">
-    <h1>Multibody dynamics, checked against exact references.</h1>
-    <p class="lead">A C++ solver for constrained mechanisms: closed loops, joint loads and analytic gradients. Each result links to its method and its limits.</p>
-    <div class="actions">
-      <a class="button" href="#results">See the results</a>
-      <a href="examples/">Simulation gallery</a>
-    </div>
-    <figure class="figure">
-      <video controls muted playsinline preload="metadata" aria-label="Two-stage Stewart platform simulation">
-        <source src="Double_Stewart.mp4#t=0.5" type="video/mp4">
-      </video>
-      <figcaption>Two stacked Stewart platforms driven by 12 leg lengths for 18 seconds. Every joint stays closed while the lower stage carries the upper one.</figcaption>
-    </figure>
+    <h1>Simulation for machines that move.</h1>
+    <p class="lead">A multibody solver for robots, mechanisms and flexible parts. Every joint stays closed, and every result can be checked.</p>
   </section>
 
-  <section class="section" id="results">
-    <h2>What has been checked</h2>
-    <p>Each case is compared with a reference that does not come from the solver.</p>
-    <table class="results">
-      <thead><tr><th scope="col">Case</th><th scope="col">Reference</th><th scope="col">Result</th><th scope="col"><span class="visually-hidden">Details</span></th></tr></thead>
-      <tbody>
-        <tr>
-          <td>Two-stage Stewart platform</td>
-          <td>Exact forward kinematics</td>
-          <td>Platform position within a micrometre over the full run. MuJoCo at a similar speed is about a tenth of a millimetre off.</td>
-          <td><a href="stewart-benchmark/">Benchmark</a></td>
-        </tr>
-        <tr>
-          <td>Gyroscope, spinning top, tumbling body</td>
-          <td>Analytical solutions</td>
-          <td>Motion agrees with the exact solutions. Energy and momentum are conserved.</td>
-          <td><a href="papers/rotational-dynamics/">Report</a></td>
-        </tr>
-        <tr>
-          <td>Parameter sensitivities</td>
-          <td>Finite differences</td>
-          <td>Analytic gradients of motion and joint loads for springs and bushings agree over 30-second runs.</td>
-          <td><a href="differentiable-dynamics/">Scope</a></td>
-        </tr>
-      </tbody>
-    </table>
-  </section>
-
-  <section class="section" id="applications">
-    <h2>Where it applies</h2>
-    <div class="areas">
-      <div><h3>Parallel robots and hexapods</h3><p>Closed-loop motion, actuator loads and positioning accuracy.</p></div>
-      <div><h3>Closed-loop machinery</h3><p>Linkages and actuated mechanisms: load envelopes and independent model checks.</p></div>
-      <div><h3>Chains and flexible systems</h3><p>Long chains, stiff springs, bushings and beams.</p></div>
+  <section class="reel" aria-label="Simulations">
+    <div class="feature">
+      <a class="clip" href="examples/#cotton">
+        <video muted loop playsinline preload="none" poster="examples/media/robot_cloth.jpg" aria-label="Two robot arms carrying a cotton sheet"><source src="examples/media/robot_cloth.mp4" type="video/mp4"></video>
+        <span>Two robot arms carrying a cotton sheet</span>
+      </a>
     </div>
+    <div class="grid">
+      <a class="clip" href="examples/#double-stewart">
+        <video muted loop playsinline preload="none" poster="examples/media/double_stewart.jpg" aria-label="Two-stage Stewart platform"><source src="Double_Stewart.mp4" type="video/mp4"></video>
+        <span>Two stacked Stewart platforms, twelve driven legs</span>
+      </a>
+      <a class="clip" href="examples/#soft-link">
+        <video muted loop playsinline preload="none" poster="examples/media/soft_link.jpg" aria-label="Soft robot link"><source src="examples/media/soft_link.mp4" type="video/mp4"></video>
+        <span>A soft link bending under a driven hinge</span>
+      </a>
+      <a class="clip" href="examples/#excavator">
+        <video muted loop playsinline preload="none" poster="examples/media/excavator_swing.jpg" aria-label="Mini excavator swinging a load"><source src="examples/media/excavator_swing.mp4" type="video/mp4"></video>
+        <span>A mini excavator swinging a hanging load</span>
+      </a>
+    </div>
+    <p class="more"><a href="examples/">All simulations</a></p>
   </section>
 
   <section class="section contact" id="contact">
     <h2>Have a mechanism question?</h2>
-    <p>Send a short description. A written feasibility note is free. If it fits, a small paid pilot answers one engineering question with a short report.</p>
+    <p>Send a short description. A written feasibility note is free.</p>
     <a class="email" href="mailto:manifoldsx.eng@gmail.com">manifoldsx.eng@gmail.com</a>
   </section>
 
@@ -98,5 +74,16 @@
   </div>
 </footer>
 
+<script>
+(() => {
+  const vids = [...document.querySelectorAll('.reel video')];
+  if (matchMedia('(prefers-reduced-motion: reduce)').matches || !('IntersectionObserver' in window)) return;
+  const io = new IntersectionObserver(es => es.forEach(e => {
+    const v = e.target;
+    if (e.isIntersecting) { if (v.preload === 'none') v.preload = 'auto'; v.play().catch(() => {}); } else v.pause();
+  }), { threshold: 0.35 });
+  vids.forEach(v => io.observe(v));
+})();
+</script>
 </body>
 </html>
