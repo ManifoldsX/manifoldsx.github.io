@@ -4,13 +4,13 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>ManifoldsX – accurate, differentiable simulation for robots and machines</title>
-<meta name="description" content="ManifoldsX is a dynamics solver for engineers who design robots, parallel platforms and machines with flexible parts. Start with a simulation pilot: one mechanism, one question, a report you can check.">
+<meta name="description" content="ManifoldsX is a high-fidelity, differentiable physics framework for simulating the dynamics of robots and machines.">
 <meta name="author" content="Yosi BZ">
 <link rel="canonical" href="https://manifoldsx.github.io/">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="ManifoldsX">
 <meta property="og:title" content="ManifoldsX – accurate, differentiable simulation for robots and machines">
-<meta property="og:description" content="Physics-based dynamics for robots, parallel platforms and machines with flexible parts. Start with a simulation pilot.">
+<meta property="og:description" content="ManifoldsX is a high-fidelity, differentiable physics framework for simulating the dynamics of robots and machines.">
 <meta property="og:url" content="https://manifoldsx.github.io/">
 <meta name="twitter:card" content="summary">
 <link rel="preload" href="assets/fonts/source-serif-4.woff2" as="font" type="font/woff2" crossorigin>
@@ -25,7 +25,7 @@
       <a href="overview/">Overview</a>
       <a href="examples/">Gallery</a>
       <a href="papers/">Papers</a>
-      <a href="#pilot">Start a pilot</a>
+      <a href="#pilot">Get in touch</a>
     </nav>
   </div>
 </header>
@@ -35,15 +35,14 @@
   <section class="hero">
     <p class="eyebrow">Physics-based dynamics</p>
     <h1>Accurate, differentiable simulation for robots and machines.</h1>
-    <p class="lead">A dynamics solver for engineers who design robots, parallel platforms and machines with flexible parts. It computes motion and loads, and how both change with your design parameters. Available today through simulation pilots.</p>
-    <div class="actions">
-      <a class="button" href="mailto:manifoldsx.eng@gmail.com?subject=Simulation%20pilot&amp;body=Mechanism%3A%0D%0A%0D%0AThe%20question%20you%20need%20answered%3A%0D%0A%0D%0AWhat%20you%20have%20(CAD%2C%20masses%2C%20motion%20or%20test%20data)%3A%0D%0A%0D%0ATimeline%3A%0D%0A">Discuss a simulation pilot</a>
-      <a href="#pilot">How a pilot works</a>
-    </div>
+    <p class="lead">ManifoldsX is a high-fidelity, differentiable physics framework for simulating the dynamics of robots and machines.</p>
+    <p>Calculate motion, joint forces, and actuator loads—and how they change with your design parameters.</p>
+    <p>Have a system you’d like to simulate? Get in touch to discuss your project.</p>
+    <div class="actions"><a class="button" href="examples/">View simulations</a><a href="#pilot">Discuss your project</a></div>
     <div class="needs">
-      <div><h3>Coordinated motion</h3><p>Many actuators driving one mechanism, with closed loops that stay closed. Does the platform go exactly where the legs put it?</p></div>
-      <div><h3>Flexible interaction</h3><p>Machines that carry or contain soft parts: fabric, flexible links, beams. How does the part deform as the machine moves it?</p></div>
-      <div><h3>Accurate loads</h3><p>Joint and actuator loads through the whole duty cycle. What does each actuator have to carry, and with what margin?</p></div>
+      <div><h3>Robots and motion systems</h3><p>Simulate robot arms, parallel platforms, and linkages with multiple actuators.</p></div>
+      <div><h3>Flexible parts and materials</h3><p>Simulate how beams, soft parts, and fabric deform as they move and interact with their surroundings.</p></div>
+      <div><h3>Joint forces and actuator loads</h3><p>Calculate forces and torques throughout the motion to size actuators and check component loads.</p></div>
     </div>
   </section>
 
@@ -52,22 +51,23 @@
       <a class="clip" href="examples/#cotton">
         <video muted loop playsinline preload="none" poster="examples/media/robot_cloth.jpg" aria-label="Two robot arms moving a cotton sheet"><source src="examples/media/robot_cloth.mp4" type="video/mp4"></video>
       </a>
-      <p class="caption"><b>The question:</b> when two arms move a cotton sheet, how does the sheet lag, fold and ripple? Arms and cloth are solved as one model, so the sheet&rsquo;s weight and drag act on the grippers and arm joints. Rendered from the solver output.</p>
+      <p class="caption"><b>Two robot arms handling fabric</b><br>The arms and fabric are simulated together, including the forces transferred through the grippers.</p>
     </div>
     <div class="second">
       <a class="clip" href="examples/#granular">
         <video muted loop playsinline preload="none" poster="examples/media/granular_collapse.jpg" aria-label="Granular column collapsing"><source src="examples/media/granular_collapse.mp4" type="video/mp4"></video>
       </a>
-      <p class="caption"><b>The question:</b> how does a loose material flow and settle? About 15,000 grains, each with elastic contact, friction and rolling resistance. This is the groundwork for buckets, grippers and wheels working in sand or powder.</p>
+      <p class="caption"><b>Granular flow</b><br>A column of 15,000 particles collapses and settles under gravity, with friction and contact between the particles.</p>
     </div>
   </section>
 
   <section class="section" id="evidence">
-    <h2>Evidence you can check</h2>
-    <p>Every claim here comes with its settings and a way to check it yourself.</p>
+    <h2>Benchmarks and validation</h2>
+    <p>Compare simulation results with analytical solutions. Each benchmark includes the model, solver settings, and reference results.</p>
 
     <div class="proof-text">
-      <h3>Closed loops that stay closed</h3>
+      <h3>Closed-loop accuracy</h3>
+      <p>Two stacked Stewart platforms driven by twelve actuators. Position and orientation are compared with an independent forward-kinematics solution over an 18-second simulation.</p>
       <dl class="facts">
         <dt>Model</dt><dd>Two stacked Stewart platforms, 12 driven legs, 18&nbsp;s</dd>
         <dt>Reference</dt><dd>Exact forward kinematics from the leg lengths</dd>
@@ -78,39 +78,17 @@
       <p class="links"><a href="stewart-benchmark/">Benchmark</a><a href="stewart-benchmark/double_stewart_reproduction.zip">Reproduction package (zip, 11&nbsp;MB)</a></p>
     </div>
 
-    <div class="calib" id="sensitivity">
-      <h3>Calibrate a model from measured motion</h3>
-      <p>A pendulum hangs from a sliding block on a spring of unknown stiffness. We start from a guess 13&nbsp;% too low. Each run returns the pendulum tip&rsquo;s path and its derivative with respect to stiffness, computed analytically in the same run, and that derivative gives the next estimate. After three runs the model matches the measured path to the noise level, and the stiffness comes back as 226&nbsp;N/m, within 2&times;10<sup>&minus;5</sup>&nbsp;N/m of the true value.</p>
-      <figure class="figure">
-        <img src="examples/media/calibration.svg" alt="Model minus measured tip position over 6 seconds for three runs: about 21 mm misfit, then 2.6 mm, then 0.48 mm, the noise level">
-        <figcaption>The &ldquo;measured&rdquo; path is a simulation at 226&nbsp;N/m with 0.5&nbsp;mm of random noise added, so the true answer is known. One Gauss&ndash;Newton step per run. <a href="differentiable-dynamics/">How the derivatives are computed and checked</a>.</figcaption>
-      </figure>
-    </div>
-    <p class="also tight">Long-run accuracy: ten classical problems, each run for 1,000 seconds against an exact answer. <a href="papers/">Read the paper</a>.</p>
+    <div class="calib" id="sensitivity"><h3>Differentiable physics</h3><p>Use analytic gradients to calibrate models, optimize designs, and identify the parameters that matter most.</p><p><a href="differentiable-dynamics/">Explore parameter sensitivities</a></p></div>
+    <div class="also tight"><h3>Long-duration accuracy</h3><p>Ten classical dynamics problems simulated for 1,000 seconds each and compared with analytical solutions.</p><a href="papers/">View the validation report</a></div>
   </section>
 
-  <section class="section" id="workflow">
-    <h2>How it works</h2>
-    <div class="steps">
-      <div><span class="when">1</span><h3>Build the model</h3><p>Parts, joints, springs, bushings and motions, in ManifoldsX Studio (a browser editor) or as a JSON file.</p></div>
-      <div><span class="when">2</span><h3>Solve</h3><p>Fixed or error-controlled steps, with every constraint held to its tolerance.</p></div>
-      <div><span class="when">3</span><h3>Inspect and report</h3><p>Play back the motion; joint and actuator loads and parameter sensitivities go into the report.</p></div>
-    </div>
-  </section>
+  <section class="section" id="workflow"><h2>Build, simulate, analyze.</h2><div class="steps">
+<div><span class="when">1</span><h3>Build</h3><p>Create your model in the web-based ManifoldsX Studio, a JSON file, or through the C++ and Python APIs.</p></div>
+<div><span class="when">2</span><h3>Simulate</h3><p>Run the model with fixed or adaptive time steps.</p></div>
+<div><span class="when">3</span><h3>Analyze</h3><p>Explore motion, forces, and parameter sensitivities.</p></div>
+</div></section>
 
-  <section class="section pilot" id="pilot">
-    <h2>Start with a pilot</h2>
-    <p>One mechanism and one engineering question, answered with a model you can inspect.</p>
-    <div class="steps">
-      <div><span class="when">Free</span><h3>Review</h3><p>Send a short description of the mechanism and the question. You get a written feasibility note: what can be modelled, which inputs are needed, and what the answer will look like.</p></div>
-      <div><span class="when">Quoted after the review</span><h3>Pilot</h3><p>One mechanism, one question, agreed motion and load cases. Assumptions and acceptance criteria are written down before work starts.</p></div>
-      <div><span class="when">Delivered</span><h3>Report</h3><p>Motion, loads and sensitivities, with the model and settings, so the result can be checked. One revision included.</p></div>
-    </div>
-    <div class="actions">
-      <a class="button" href="mailto:manifoldsx.eng@gmail.com?subject=Simulation%20pilot&amp;body=Mechanism%3A%0D%0A%0D%0AThe%20question%20you%20need%20answered%3A%0D%0A%0D%0AWhat%20you%20have%20(CAD%2C%20masses%2C%20motion%20or%20test%20data)%3A%0D%0A%0D%0ATimeline%3A%0D%0A">Discuss a simulation pilot</a>
-      <a class="email" href="mailto:manifoldsx.eng@gmail.com">manifoldsx.eng@gmail.com</a>
-    </div>
-  </section>
+  <section class="section pilot" id="pilot"><p class="eyebrow">Research collaborations</p><h2>Have a project in mind?</h2><p>Research collaborations and pilot studies are welcome. Tell us about your application and what you’d like to investigate.</p><div class="actions"><a class="button" href="mailto:manifoldsx.eng@gmail.com?subject=Research%20collaboration">Get in touch</a><a class="email" href="mailto:manifoldsx.eng@gmail.com">manifoldsx.eng@gmail.com</a></div></section>
 
   <p class="more-sims"><a href="examples/">More simulations in the gallery</a></p>
 
