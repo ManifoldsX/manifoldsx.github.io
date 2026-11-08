@@ -179,3 +179,9 @@ table.data tr.own td:first-child{font-weight:600}
 .reel .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:28px 20px;margin-top:28px}
 .reel .more{margin-top:28px;font-family:var(--sans);font-size:16px}
 @media (max-width:760px){.reel .grid{grid-template-columns:1fr;gap:22px}}
+
+.reel .lead-msg{margin-top:22px;max-width:var(--measure)}
+.reel .lead-msg h2{font-size:24px;margin-bottom:6px}
+.reel .lead-msg p{font-size:19px;color:var(--muted)}
+.clip span.msg{font-family:var(--serif);font-size:17px;color:var(--muted);margin-top:10px}
+.clip span.msg b{display:block;font-size:20px;color:var(--ink);font-weight:600;margin-bottom:2px}

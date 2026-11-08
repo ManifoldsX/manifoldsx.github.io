@@ -4,13 +4,13 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Simulation gallery – ManifoldsX</title>
-<meta name="description" content="Mechanisms simulated with ManifoldsX: Stewart platforms, a 100-link chain, a gyroscope, a spinning top, a tumbling body, robot arms holding a cotton sheet, a soft robot link and a mini excavator.">
+<meta name="description" content="Mechanisms simulated with ManifoldsX: Stewart platforms, a 100-link chain, a gyroscope, a spinning top, a tumbling body, robot arms holding a cotton sheet, a soft robot link, a mini excavator and a granular collapse.">
 <meta name="author" content="Yosi BZ">
 <link rel="canonical" href="https://manifoldsx.github.io/examples/">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="ManifoldsX">
 <meta property="og:title" content="Simulation gallery – ManifoldsX">
-<meta property="og:description" content="Mechanisms simulated with ManifoldsX: Stewart platforms, a 100-link chain, a gyroscope, a spinning top, a tumbling body, robot arms holding a cotton sheet, a soft robot link and a mini excavator.">
+<meta property="og:description" content="Mechanisms simulated with ManifoldsX: Stewart platforms, a 100-link chain, a gyroscope, a spinning top, a tumbling body, robot arms holding a cotton sheet, a soft robot link, a mini excavator and a granular collapse.">
 <meta property="og:url" content="https://manifoldsx.github.io/examples/">
 <meta name="twitter:card" content="summary">
 <link rel="preload" href="../assets/fonts/source-serif-4.woff2" as="font" type="font/woff2" crossorigin>
@@ -147,15 +147,28 @@
   </article>
 
   <article class="case" id="excavator">
-    <h2>Mini excavator swinging a load</h2>
-    <p>A 1.8 t mini excavator holds 150 kg on a 1 m cable, 3.1 m out from the swing axis, and swings it 90 degrees to the side. Each track is a loop of 38 shoes in contact with the ground.</p>
+    <h2>Mini excavator with a hanging load</h2>
+    <p>A 1.8 t mini excavator drives slowly forward on its tracks, stops, then swings a load hanging from its boom 90 degrees to the side.</p>
     <figure>
-      <video controls muted playsinline preload="metadata" poster="media/excavator_swing.jpg" aria-label="Mini excavator swinging a hanging load"><source src="media/excavator_swing.mp4" type="video/mp4"></video>
+      <video controls muted playsinline preload="metadata" poster="media/excavator.jpg" aria-label="Mini excavator driving forward and swinging a hanging load"><source src="media/excavator.mp4" type="video/mp4"></video>
       <figcaption>Real time. 100 bodies, including every track shoe.</figcaption>
     </figure>
     <div class="notes">
-      <div><h3>The question</h3><p>Does the machine stay planted while the load keeps swinging on its cable after the stop?</p></div>
-      <div><h3>What happens</h3><p>The load swings out to about 37 degrees on the cable; the machine tilts less than 0.2 degrees. Every joint stays closed to round-off level for the whole run.</p></div>
+      <div><h3>What is modelled</h3><p>Each track is a loop of 38 shoes in contact with the ground, driven by its sprocket. The upper turns on its swing bearing with the load on a cable.</p></div>
+      <div><h3>What to watch</h3><p>The tracks carry the machine forward and settle; then the load sways gently on its cable as the upper turns and stops.</p></div>
+    </div>
+  </article>
+
+  <article class="case" id="granular">
+    <h2>Granular collapse</h2>
+    <p>A column of about 15,000 grains is released and spreads across the floor. The colour bands show where each grain started.</p>
+    <figure>
+      <video controls muted playsinline preload="metadata" poster="media/granular_collapse.jpg" aria-label="Granular column collapsing"><source src="media/granular_collapse.mp4" type="video/mp4"></video>
+      <figcaption>Quarter speed.</figcaption>
+    </figure>
+    <div class="notes">
+      <div><h3>What is modelled</h3><p>Every grain is a sphere with elastic contact, friction and rolling resistance.</p></div>
+      <div><h3>What to watch</h3><p>The bands shear and stretch as the column slumps into a heap.</p></div>
     </div>
   </article>
 

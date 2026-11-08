@@ -3,13 +3,13 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>ManifoldsX – simulation for machines that move</title>
+<title>ManifoldsX – accurate, differentiable multibody dynamics</title>
 <meta name="description" content="ManifoldsX is a multibody solver for robots, mechanisms and flexible parts.">
 <meta name="author" content="Yosi BZ">
 <link rel="canonical" href="https://manifoldsx.github.io/">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="ManifoldsX">
-<meta property="og:title" content="ManifoldsX – simulation for machines that move">
+<meta property="og:title" content="ManifoldsX – accurate, differentiable multibody dynamics">
 <meta property="og:description" content="ManifoldsX is a multibody solver for robots, mechanisms and flexible parts.">
 <meta property="og:url" content="https://manifoldsx.github.io/">
 <meta name="twitter:card" content="summary">
@@ -32,29 +32,31 @@
 <main class="wrap">
 
   <section class="hero">
-    <h1>Simulation for machines that move.</h1>
-    <p class="lead">A multibody solver for robots, mechanisms and flexible parts. Every joint stays closed, and every result can be checked.</p>
+    <h1>Accurate, differentiable multibody dynamics.</h1>
   </section>
 
   <section class="reel" aria-label="Simulations">
     <div class="feature">
       <a class="clip" href="examples/#cotton">
         <video muted loop playsinline preload="none" poster="examples/media/robot_cloth.jpg" aria-label="Two robot arms carrying a cotton sheet"><source src="examples/media/robot_cloth.mp4" type="video/mp4"></video>
-        <span>Two robot arms carrying a cotton sheet</span>
       </a>
+    </div>
+    <div class="msg lead-msg">
+      <h2>Differentiable by design</h2>
+      <p>ManifoldsX computes how motion and loads respond to design parameters, analytically, while it simulates. Use those gradients to calibrate models and optimize designs.</p>
     </div>
     <div class="grid">
       <a class="clip" href="examples/#double-stewart">
         <video muted loop playsinline preload="none" poster="examples/media/double_stewart.jpg" aria-label="Two-stage Stewart platform"><source src="Double_Stewart.mp4" type="video/mp4"></video>
-        <span>Two stacked Stewart platforms, twelve driven legs</span>
+        <span class="msg"><b>Accurate</b>Closed loops stay closed, checked against exact answers.</span>
       </a>
-      <a class="clip" href="examples/#soft-link">
-        <video muted loop playsinline preload="none" poster="examples/media/soft_link.jpg" aria-label="Soft robot link"><source src="examples/media/soft_link.mp4" type="video/mp4"></video>
-        <span>A soft link bending under a driven hinge</span>
+      <a class="clip" href="examples/#chain">
+        <video muted loop playsinline preload="none" poster="examples/media/chain100.jpg" aria-label="100-link chain"><source src="examples/media/chain100.mp4" type="video/mp4"></video>
+        <span class="msg"><b>Fast</b>Large mechanisms on a single CPU core.</span>
       </a>
-      <a class="clip" href="examples/#excavator">
-        <video muted loop playsinline preload="none" poster="examples/media/excavator_swing.jpg" aria-label="Mini excavator swinging a load"><source src="examples/media/excavator_swing.mp4" type="video/mp4"></video>
-        <span>A mini excavator swinging a hanging load</span>
+      <a class="clip" href="examples/#granular">
+        <video muted loop playsinline preload="none" poster="examples/media/granular_collapse.jpg" aria-label="Granular column collapsing"><source src="examples/media/granular_collapse.mp4" type="video/mp4"></video>
+        <span class="msg"><b>Wide range of physics</b>Rigid bodies, flexible solids, fabric and granular materials.</span>
       </a>
     </div>
     <p class="more"><a href="examples/">All simulations</a></p>
