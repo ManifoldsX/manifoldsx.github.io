@@ -4,13 +4,13 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Simulation gallery – ManifoldsX</title>
-<meta name="description" content="Mechanisms simulated with ManifoldsX: Stewart platforms, a 100-link chain, a gyroscope, a spinning top, a tumbling body, robot arms holding a cotton sheet, a soft robot link, a mini excavator and a granular collapse.">
+<meta name="description" content="Simulations grouped by engineering need: coordinated motion (Stewart platforms, a 100-link chain), flexible interaction (a cotton sheet held by robot arms, a soft link, granular flow), accurate loads (a four-bar near toggle, a mini excavator) and classical checks against exact answers.">
 <meta name="author" content="Yosi BZ">
 <link rel="canonical" href="https://manifoldsx.github.io/examples/">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="ManifoldsX">
 <meta property="og:title" content="Simulation gallery – ManifoldsX">
-<meta property="og:description" content="Mechanisms simulated with ManifoldsX: Stewart platforms, a 100-link chain, a gyroscope, a spinning top, a tumbling body, robot arms holding a cotton sheet, a soft robot link, a mini excavator and a granular collapse.">
+<meta property="og:description" content="Simulations grouped by engineering need: coordinated motion (Stewart platforms, a 100-link chain), flexible interaction (a cotton sheet held by robot arms, a soft link, granular flow), accurate loads (a four-bar near toggle, a mini excavator) and classical checks against exact answers.">
 <meta property="og:url" content="https://manifoldsx.github.io/examples/">
 <meta name="twitter:card" content="summary">
 <link rel="preload" href="../assets/fonts/source-serif-4.woff2" as="font" type="font/woff2" crossorigin>
@@ -24,7 +24,7 @@
     <nav class="site-nav" aria-label="Main">
       <a href="../examples/" aria-current="page">Gallery</a>
       <a href="../papers/">Papers</a>
-      <a href="#contact">Contact</a>
+      <a href="../#pilot">Start a pilot</a>
     </nav>
   </div>
 </header>
@@ -33,11 +33,21 @@
 
   <section class="page-head">
     <h1>Simulation gallery</h1>
-    <p class="lead">Mechanisms in motion, and the question each one tests.</p>
+    <p class="lead">Simulations grouped by the engineering need they answer. Each one states its question, and the answer where it has been checked.</p>
+    <nav class="toc" aria-label="Groups">
+      <a href="#coordinated-motion">Coordinated motion</a>
+      <a href="#flexible-interaction">Flexible interaction</a>
+      <a href="#accurate-loads">Accurate loads</a>
+      <a href="#exact-answers">Checked against exact answers</a>
+    </nav>
   </section>
 
+  <section class="need-group" id="coordinated-motion">
+    <p class="eyebrow">Need 1</p>
+    <h2>Coordinated motion</h2>
+    <p class="lead">Many actuators or joints driving one mechanism, with closed loops that stay closed.</p>
   <article class="case" id="double-stewart">
-    <h2>Two-stage Stewart platform</h2>
+    <h3 class="case-title">Two-stage Stewart platform</h3>
     <p>Two Stewart platforms, one on top of the other. Every motion of the lower stage moves the base of the upper one, and every joint must stay closed while all twelve leg lengths change.</p>
     <figure>
       <video controls muted playsinline preload="metadata" aria-label="Two-stage Stewart platform simulation"><source src="../Double_Stewart.mp4#t=0.5" type="video/mp4"></video>
@@ -45,26 +55,13 @@
     </figure>
     <div class="notes">
       <div><h3>The question</h3><p>How closely does the upper platform follow the pose set by the twelve leg lengths?</p></div>
-      <div><h3>How it is checked</h3><p>Platform positions are compared with an exact forward-kinematics solution that involves no dynamics and no solver.</p></div>
+      <div><h3>The answer</h3><p>Both platforms stay within one nanometre of the exact pose from forward kinematics, at about 13&times; real time on one CPU core.</p></div>
     </div>
-    <div class="links"><a href="../stewart-benchmark/">Read the benchmark</a></div>
-  </article>
-
-  <article class="case" id="chain">
-    <h2>100-link chain</h2>
-    <p>A long chain turns a simple pendulum into a strongly coupled system. Each link moves its neighbours, and every joint must stay closed through the swing.</p>
-    <figure>
-      <video controls muted playsinline preload="metadata" aria-label="100-link chain simulation"><source src="../100Links.mp4#t=0.5" type="video/mp4"></video>
-      <figcaption>A 100-link pendulum released from rest.</figcaption>
-    </figure>
-    <div class="notes">
-      <div><h3>Why it matters</h3><p>Long chains test large rotations, constraint propagation and the cost of solving many coupled equations at every step.</p></div>
-      <div><h3>What to watch</h3><p>The motion travelling from the support to the tip as neighbouring links exchange momentum.</p></div>
-    </div>
+    <div class="links"><a href="../stewart-benchmark/">Read the benchmark</a><a href="../stewart-benchmark/double_stewart_reproduction.zip">Reproduction package (zip, 11&nbsp;MB)</a></div>
   </article>
 
   <article class="case" id="stewart">
-    <h2>Stewart platform</h2>
+    <h3 class="case-title">Stewart platform</h3>
     <p>Six extendable legs move a plate. Their geometry couples translation and rotation, which makes it a compact example of a spatial closed loop.</p>
     <figure>
       <video controls muted playsinline preload="metadata" aria-label="Single-stage Stewart platform simulation"><source src="../Stewart.mp4#t=0.5" type="video/mp4"></video>
@@ -76,8 +73,102 @@
     </div>
   </article>
 
+  <article class="case" id="chain">
+    <h3 class="case-title">100-link chain</h3>
+    <p>A long chain turns a simple pendulum into a strongly coupled system. Each link moves its neighbours, and every joint must stay closed through the swing.</p>
+    <figure>
+      <video controls muted playsinline preload="metadata" poster="media/chain100.jpg" aria-label="100-link chain simulation"><source src="media/chain100.mp4" type="video/mp4"></video>
+      <figcaption>A 100-link pendulum released from rest.</figcaption>
+    </figure>
+    <div class="notes">
+      <div><h3>The question</h3><p>Can a hundred coupled joints stay closed through a violent swing, at a useful speed?</p></div>
+      <div><h3>Why it matters</h3><p>Cables, tethers, track loops and long linkages all behave like this. Long chains test large rotations, constraint propagation and the cost of solving many coupled equations at every step.</p></div>
+          </div>
+  </article>
+  </section>
+
+  <section class="need-group" id="flexible-interaction">
+    <p class="eyebrow">Need 2</p>
+    <h2>Flexible interaction</h2>
+    <p class="lead">Machines that carry or contain soft parts and loose materials: fabric, flexible links, grains.</p>
+  <article class="case" id="cotton">
+    <h3 class="case-title">Cotton sheet held by two robot arms</h3>
+    <p>Two 7-joint arms hold an A3 cotton sheet by its top corners and move it around. Arms and cloth are one model, so the grippers carry the cloth's real load.</p>
+    <figure>
+      <video controls muted playsinline preload="metadata" poster="media/robot_cloth.jpg" aria-label="Two robot arms moving a cotton sheet"><source src="media/robot_cloth.mp4" type="video/mp4"></video>
+      <figcaption>Rendered from the solver output. Arm models from MuJoCo Menagerie; cloth motion from recordings by Coltraro et al. (2025).</figcaption>
+    </figure>
+    <div class="notes">
+      <div><h3>The question</h3><p>When two arms move a cotton sheet, how does the sheet lag, fold and ripple?</p></div>
+      <div><h3>What is modelled</h3><p>The sheet is a grid of small patches joined by flexible connections, with air drag and the mass of the air it pushes. Each arm follows its path under joint control.</p></div>
+    </div>
+  </article>
+
+  <article class="case" id="soft-link">
+    <h3 class="case-title">Soft robot link</h3>
+    <p>A 400 mm link of soft material, 40 mm square, is swung back and forth by a driven hinge. It is a flexible solid of 216 hex elements, joined to a rigid hub.</p>
+    <figure>
+      <video controls muted playsinline preload="metadata" poster="media/soft_link.jpg" aria-label="Soft link swung by a driven hinge"><source src="media/soft_link.mp4" type="video/mp4"></video>
+      <figcaption>Half speed. Colour shows how far the link bends away from its rigid position, up to 28 mm; the thin outline marks where a rigid link would be.</figcaption>
+    </figure>
+    <div class="notes">
+      <div><h3>The question</h3><p>How much does a flexible link lag and bend when its joint is driven hard?</p></div>
+      <div><h3>How it is checked</h3><p>The same hex elements match the exact large-deflection beam solution to within 0.2%. Joint constraints between the solid and the hub hold to round-off level.</p></div>
+    </div>
+  </article>
+
+  <article class="case" id="granular">
+    <h3 class="case-title">Granular collapse</h3>
+    <p>A column of about 15,000 grains is released and spreads across the floor. The colour bands show where each grain started.</p>
+    <figure>
+      <video controls muted playsinline preload="metadata" poster="media/granular_collapse.jpg" aria-label="Granular column collapsing"><source src="media/granular_collapse.mp4" type="video/mp4"></video>
+      <figcaption>Quarter speed.</figcaption>
+    </figure>
+    <div class="notes">
+      <div><h3>The question</h3><p>How does a loose material flow and settle? This is the groundwork for buckets, grippers and wheels working in sand or powder.</p></div>
+      <div><h3>What is modelled</h3><p>Every grain is a sphere with elastic contact, friction and rolling resistance.</p></div>
+    </div>
+  </article>
+  </section>
+
+  <section class="need-group" id="accurate-loads">
+    <p class="eyebrow">Need 3</p>
+    <h2>Accurate loads</h2>
+    <p class="lead">Joint and actuator loads through the whole duty cycle, for sizing and checks.</p>
+  <article class="case" id="four-bar">
+    <h3 class="case-title">Four-bar linkage at the edge of toggle</h3>
+    <p>A crank drives a four-bar linkage whose links come within 0.1&nbsp;mm of lining up straight once every turn. Near that point a small force holds a large one, which is why clamps and presses use it, and why solvers struggle with it.</p>
+    <figure class="pairfig">
+      <div class="row"><img src="media/fourbar_model.jpg" alt="Four-bar linkage model"><img src="media/fourbar_torque.svg" alt="Exact drive torque over one revolution, with a sharp peak near toggle"></div>
+      <figcaption>The model, the linkage at its closest approach to toggle, and the exact drive torque over one revolution.</figcaption>
+    </figure>
+    <div class="notes">
+      <div><h3>The question</h3><p>What torque does the drive need through the whole cycle, including the sharp peak near toggle?</p></div>
+      <div><h3>The answer</h3><p>Over 1,000 revolutions, the computed drive torque stays within 3.6&times;10<sup>&minus;3</sup>&nbsp;% of its peak from the exact value.</p></div>
+    </div>
+    <div class="links"><a href="../papers/">Read the paper</a></div>
+  </article>
+
+  <article class="case" id="excavator">
+    <h3 class="case-title">Mini excavator with a hanging load</h3>
+    <p>A 1.8 t mini excavator drives slowly forward on its tracks, stops, then swings a load hanging from its boom 90 degrees to the side.</p>
+    <figure>
+      <video controls muted playsinline preload="metadata" poster="media/excavator.jpg" aria-label="Mini excavator driving forward and swinging a hanging load"><source src="media/excavator.mp4" type="video/mp4"></video>
+      <figcaption>Real time. 100 bodies, including every track shoe.</figcaption>
+    </figure>
+    <div class="notes">
+      <div><h3>The question</h3><p>How does a hanging load sway as the machine drives, stops and swings, and how quickly does it settle? In a study, the output would be swing-drive torque, cylinder forces and track contact loads through the cycle.</p></div>
+      <div><h3>What is modelled</h3><p>Each track is a loop of 38 shoes in contact with the ground, driven by its sprocket. The upper turns on its swing bearing with the load on a cable.</p></div>
+    </div>
+  </article>
+  </section>
+
+  <section class="need-group" id="exact-answers">
+    <p class="eyebrow">Checks</p>
+    <h2>Checked against exact answers</h2>
+    <p class="lead">Classical rotating bodies whose exact motion is known, used to test the solver itself. The long-run versions are in the <a href="../papers/">papers</a>.</p>
   <article class="case" id="gyroscope">
-    <h2>Gimballed gyroscope</h2>
+    <h3 class="case-title">Gimballed gyroscope</h3>
     <p>A spinning rotor sits inside two free gimbals. The rotor's spin couples the motion of the two gimbals in ways that are hard to predict by eye.</p>
     <figure>
       <video controls muted playsinline preload="metadata" poster="../papers/rotational-dynamics/gimbal.jpg" aria-label="Gimballed gyroscope simulation"><source src="../papers/rotational-dynamics/gimbal.mp4" type="video/mp4"></video>
@@ -90,22 +181,8 @@
     <div class="links"><a href="../papers/rotational-dynamics/">Read the study</a></div>
   </article>
 
-  <article class="case" id="top">
-    <h2>Spinning top</h2>
-    <p>The top spins about its own axis while that axis travels around the vertical. Set up for steady precession, its tilt should never change.</p>
-    <figure>
-      <video controls muted playsinline preload="metadata" poster="../papers/rotational-dynamics/top.jpg" aria-label="Spinning top simulation"><source src="../papers/rotational-dynamics/top.mp4" type="video/mp4"></video>
-      <figcaption>First 6 simulated seconds, half speed.</figcaption>
-    </figure>
-    <div class="notes">
-      <div><h3>The question</h3><p>Does the top hold steady precession, with no drift in its tilt?</p></div>
-      <div><h3>How it is checked</h3><p>The full orientation is compared with the exact steady-precession solution at every step.</p></div>
-    </div>
-    <div class="links"><a href="../papers/rotational-dynamics/">Read the study</a></div>
-  </article>
-
   <article class="case" id="tumble">
-    <h2>Tumbling body</h2>
+    <h3 class="case-title">Tumbling body</h3>
     <p>A free body spun almost exactly about its middle axis of inertia flips over, again and again, with no torque acting on it.</p>
     <figure>
       <video controls muted playsinline preload="metadata" poster="../papers/rotational-dynamics/tumble.jpg" aria-label="Tumbling body simulation"><source src="../papers/rotational-dynamics/tumble.mp4" type="video/mp4"></video>
@@ -118,71 +195,35 @@
     <div class="links"><a href="../papers/rotational-dynamics/">Read the study</a></div>
   </article>
 
-
-
-  <article class="case" id="cotton">
-    <h2>Cotton sheet held by two robot arms</h2>
-    <p>Two 7-joint arms hold an A3 cotton sheet by its top corners and move it around. Arms and cloth are one model, so the grippers carry the cloth's real load.</p>
+  <article class="case" id="top">
+    <h3 class="case-title">Spinning top</h3>
+    <p>The top spins about its own axis while that axis travels around the vertical. Set up for steady precession, its tilt should never change.</p>
     <figure>
-      <video controls muted playsinline preload="metadata" poster="media/robot_cloth.jpg" aria-label="Two robot arms moving a cotton sheet"><source src="media/robot_cloth.mp4" type="video/mp4"></video>
-      <figcaption>Rendered from the solver output. Arm models from MuJoCo Menagerie; cloth motion from recordings by Coltraro et al. (2025).</figcaption>
+      <video controls muted playsinline preload="metadata" poster="../papers/rotational-dynamics/top.jpg" aria-label="Spinning top simulation"><source src="../papers/rotational-dynamics/top.mp4" type="video/mp4"></video>
+      <figcaption>First 6 simulated seconds, half speed.</figcaption>
     </figure>
     <div class="notes">
-      <div><h3>What is modelled</h3><p>The sheet is a grid of small patches joined by flexible connections, with air drag and the mass of the air it pushes. Each arm follows its path under joint control.</p></div>
-      <div><h3>What to watch</h3><p>The sheet lags behind the grippers and ripples each time the arms change direction.</p></div>
+      <div><h3>The question</h3><p>Does the top hold steady precession, with no drift in its tilt?</p></div>
+      <div><h3>How it is checked</h3><p>The full orientation is compared with the exact steady-precession solution at every step.</p></div>
     </div>
+    <div class="links"><a href="../papers/rotational-dynamics/">Read the study</a></div>
   </article>
+  </section>
 
-  <article class="case" id="soft-link">
-    <h2>Soft robot link</h2>
-    <p>A 400 mm link of soft material, 40 mm square, is swung back and forth by a driven hinge. It is a flexible solid of 216 hex elements, joined to a rigid hub.</p>
-    <figure>
-      <video controls muted playsinline preload="metadata" poster="media/soft_link.jpg" aria-label="Soft link swung by a driven hinge"><source src="media/soft_link.mp4" type="video/mp4"></video>
-      <figcaption>Half speed. Colour shows how far the link bends away from its rigid position, up to 28 mm; the thin outline marks where a rigid link would be.</figcaption>
-    </figure>
-    <div class="notes">
-      <div><h3>The question</h3><p>How much does a flexible link lag and bend when its joint is driven hard?</p></div>
-      <div><h3>How it is checked</h3><p>The same hex elements match the exact large-deflection beam solution to within 0.2%. Joint constraints between the solid and the hub hold to round-off level.</p></div>
-    </div>
-  </article>
-
-  <article class="case" id="excavator">
-    <h2>Mini excavator with a hanging load</h2>
-    <p>A 1.8 t mini excavator drives slowly forward on its tracks, stops, then swings a load hanging from its boom 90 degrees to the side.</p>
-    <figure>
-      <video controls muted playsinline preload="metadata" poster="media/excavator.jpg" aria-label="Mini excavator driving forward and swinging a hanging load"><source src="media/excavator.mp4" type="video/mp4"></video>
-      <figcaption>Real time. 100 bodies, including every track shoe.</figcaption>
-    </figure>
-    <div class="notes">
-      <div><h3>What is modelled</h3><p>Each track is a loop of 38 shoes in contact with the ground, driven by its sprocket. The upper turns on its swing bearing with the load on a cable.</p></div>
-      <div><h3>What to watch</h3><p>The tracks carry the machine forward and settle; then the load sways gently on its cable as the upper turns and stops.</p></div>
-    </div>
-  </article>
-
-  <article class="case" id="granular">
-    <h2>Granular collapse</h2>
-    <p>A column of about 15,000 grains is released and spreads across the floor. The colour bands show where each grain started.</p>
-    <figure>
-      <video controls muted playsinline preload="metadata" poster="media/granular_collapse.jpg" aria-label="Granular column collapsing"><source src="media/granular_collapse.mp4" type="video/mp4"></video>
-      <figcaption>Quarter speed.</figcaption>
-    </figure>
-    <div class="notes">
-      <div><h3>What is modelled</h3><p>Every grain is a sphere with elastic contact, friction and rolling resistance.</p></div>
-      <div><h3>What to watch</h3><p>The bands shear and stretch as the column slumps into a heap.</p></div>
-    </div>
-  </article>
-
-  <section class="section contact" id="contact">
+  <section class="section pilot" id="contact">
     <h2>Have a mechanism question?</h2>
-    <p>Send a short description. A written feasibility note is free. If it fits, a small paid pilot answers one engineering question with a short report.</p>
-    <a class="email" href="mailto:manifoldsx.eng@gmail.com">manifoldsx.eng@gmail.com</a>
+    <p>Start with a free review: send a short description of the mechanism and the question, and get a written feasibility note. If it fits, a pilot answers one engineering question with a report you can check.</p>
+    <div class="actions">
+      <a class="button" href="mailto:manifoldsx.eng@gmail.com?subject=Simulation%20pilot&amp;body=Mechanism%3A%0D%0A%0D%0AThe%20question%20you%20need%20answered%3A%0D%0A%0D%0AWhat%20you%20have%20(CAD%2C%20masses%2C%20motion%20or%20test%20data)%3A%0D%0A%0D%0ATimeline%3A%0D%0A">Discuss a simulation pilot</a>
+      <a href="../#pilot">How a pilot works</a>
+    </div>
   </section>
 
 </main>
 
 <footer class="site-footer">
   <div class="wrap">
-    <span>ManifoldsX, by Yosi BZ, 2026</span>
+    <span>ManifoldsX, by Yosi BZ</span>
   </div>
 </footer>
 
