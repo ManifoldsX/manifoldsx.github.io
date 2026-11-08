@@ -5,7 +5,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Overview – ManifoldsX</title>
 <meta name="description" content="What ManifoldsX is, what a model can contain, what it is used for, and how to get it.">
-<meta name="author" content="Yosi BZ">
 <link rel="canonical" href="https://manifoldsx.github.io/overview/">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="ManifoldsX">
@@ -37,7 +36,7 @@
   </section>
 
   <section class="section overview-text">
-    <p>ManifoldsX is a physics-based dynamics solver for engineering work where the answer has to be right: robots, parallel platforms, linkages and machines with flexible parts. It computes the motion of a mechanism, the loads in every joint and actuator, and how both change with the design parameters. ManifoldsX is developed by Yosi BZ. It is currently available through simulation pilots, and the solver source is not public.</p>
+    <p>ManifoldsX is a physics-based dynamics solver for engineering work where the answer has to be right: robots, parallel platforms, linkages and machines with flexible parts. It computes the motion of a mechanism, the loads in every joint and actuator, and how both change with the design parameters. It is currently available through simulation pilots, and the solver source is not public.</p>
     <p>ManifoldsX is a C++ library. A mechanism is described by its parts, joints, force elements, contacts and prescribed motions. Joints are exact constraints held to the solver tolerance, not stiff springs, so closed loops stay closed. Models are written as JSON files or built in ManifoldsX Studio, a browser-based editor that solves a model and plays back the result. Two integrators are provided: an implicit HHT method on the index-3 equations, and HEDOP5, an explicit method with projection onto the constraints for long, accurate runs. Derivatives of the motion and loads with respect to model parameters are computed analytically, in the same run as the simulation.</p>
     <p>ManifoldsX can be used to size actuators and find load envelopes, check closed-loop mechanisms near singular poses, calibrate model parameters against test data, and optimize designs with exact gradients. It can also serve as an independent check on models built in other simulators, and for long runs such as digital twins, where small errors would otherwise pile up.</p>
   </section>
@@ -84,7 +83,7 @@
 
 <footer class="site-footer">
   <div class="wrap">
-    <span>ManifoldsX, by Yosi BZ</span>
+    <span>ManifoldsX</span>
   </div>
 </footer>
 
