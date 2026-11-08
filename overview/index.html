@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Overview – ManifoldsX</title>
+<meta name="description" content="What ManifoldsX is, what a model can contain, what it is used for, and how to get it.">
+<meta name="author" content="Yosi BZ">
+<link rel="canonical" href="https://manifoldsx.github.io/overview/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="ManifoldsX">
+<meta property="og:title" content="Overview – ManifoldsX">
+<meta property="og:description" content="What ManifoldsX is, what a model can contain, what it is used for, and how to get it.">
+<meta property="og:url" content="https://manifoldsx.github.io/overview/">
+<meta name="twitter:card" content="summary">
+<link rel="preload" href="../assets/fonts/source-serif-4.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="../assets/site.css">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="../">ManifoldsX</a>
+    <nav class="site-nav" aria-label="Main">
+      <a href="../overview/" aria-current="page">Overview</a>
+      <a href="../examples/">Gallery</a>
+      <a href="../papers/">Papers</a>
+      <a href="../#pilot">Start a pilot</a>
+    </nav>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <section class="page-head">
+    <h1>Overview</h1>
+  </section>
+
+  <section class="section overview-text">
+    <p>ManifoldsX is a multibody dynamics solver for engineering work where the answer has to be right: robots, parallel platforms, linkages and machines with flexible parts. It computes the motion of a mechanism, the loads in every joint and actuator, and how both change with the design parameters. ManifoldsX is developed by Yosi BZ. It is currently available through simulation pilots, and the solver source is not public.</p>
+    <p>ManifoldsX is a C++ library. A mechanism is described by its parts, joints, force elements, contacts and prescribed motions. Joints are exact constraints held to the solver tolerance, not stiff springs, so closed loops stay closed. Models are written as JSON files or built in ManifoldsX Studio, a browser-based editor that solves a model and plays back the result. Two integrators are provided: an implicit HHT method on the index-3 equations, and HEDOP5, an explicit method with projection onto the constraints for long, accurate runs. Derivatives of the motion and loads with respect to model parameters are computed analytically, in the same run as the simulation.</p>
+    <p>ManifoldsX can be used to size actuators and find load envelopes, check closed-loop mechanisms near singular poses, calibrate model parameters against test data, and optimize designs with exact gradients. It can also serve as an independent check on models built in other simulators, and for long runs such as digital twins, where small errors would otherwise pile up.</p>
+  </section>
+
+  <section class="section">
+    <h2>What a model can contain</h2>
+    <dl class="contains">
+      <dt>Parts</dt><dd>Rigid bodies with mass and inertia. Flexible members built from beam elements.</dd>
+      <dt>Joints</dt><dd>Revolute, prismatic, spherical, universal, cylindrical, planar and fixed, each an exact constraint.</dd>
+      <dt>Motion and control</dt><dd>Prescribed joint motions from tables or laws, and joint controllers.</dd>
+      <dt>Force elements</dt><dd>Spring-dampers, six-axis bushings and point forces.</dd>
+      <dt>Contact</dt><dd>Spheres, capsules and planes, with elastic contact and regularized Coulomb or Stribeck friction.</dd>
+      <dt>Results</dt><dd>Motion, joint and actuator loads, energy, constraint residuals, and derivatives with respect to model parameters.</dd>
+    </dl>
+  </section>
+
+  <section class="section">
+    <h2>Applications</h2>
+    <p>Each item links to a simulation or a check on this site.</p>
+    <ul class="apps">
+      <li><a href="../examples/#double-stewart">Parallel robots and motion platforms</a></li>
+      <li><a href="../examples/#cotton">Robot arms handling fabric</a></li>
+      <li><a href="../examples/#four-bar">Linkages near toggle: clamps and presses</a></li>
+      <li><a href="../examples/#soft-link">Flexible links and beams</a></li>
+      <li><a href="../examples/#excavator">Tracked machines carrying loads</a></li>
+      <li><a href="../examples/#chain">Chains, cables and long linkages</a></li>
+      <li><a href="../examples/#gyroscope">Gyroscopes, gimbals and spinning bodies</a></li>
+      <li><a href="../#sensitivity">Calibration and design optimization with gradients</a></li>
+      <li><a href="../stewart-benchmark/">Independent checks of models from other simulators</a></li>
+      <li><a href="../examples/#granular">Granular materials (in development)</a></li>
+    </ul>
+  </section>
+
+  <section class="section pilot" id="contact">
+    <h2>How to get it</h2>
+    <p>ManifoldsX is not open source. It is available through simulation pilots: a free first review of your mechanism and question, then one engineering question answered with a report you can check.</p>
+    <div class="actions">
+      <a class="button" href="mailto:manifoldsx.eng@gmail.com?subject=Simulation%20pilot&amp;body=Mechanism%3A%0D%0A%0D%0AThe%20question%20you%20need%20answered%3A%0D%0A%0D%0AWhat%20you%20have%20(CAD%2C%20masses%2C%20motion%20or%20test%20data)%3A%0D%0A%0D%0ATimeline%3A%0D%0A">Discuss a simulation pilot</a>
+      <a href="../#pilot">How a pilot works</a>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <span>ManifoldsX, by Yosi BZ</span>
+  </div>
+</footer>
+
+</body>
+</html>
