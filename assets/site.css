@@ -222,3 +222,20 @@ table.data tr.own td:first-child{font-weight:600}
   .needs{margin-top:32px}
   .sens{margin-top:48px}
 }
+
+/* ---------- Gallery grouped by need ---------- */
+.toc{display:flex;flex-wrap:wrap;gap:10px 22px;margin-top:22px;font-family:var(--sans);font-size:16px}
+.need-group{padding-top:88px}
+.need-group > .eyebrow{margin-bottom:6px}
+.need-group > h2{font-size:34px}
+.need-group > .lead{margin-top:8px}
+.need-group .case:first-of-type{padding-top:48px}
+.case-title{font-size:25px;line-height:1.25}
+.case > p{margin-top:8px}
+.pairfig .row{display:grid;grid-template-columns:38% 1fr;gap:18px;align-items:center}
+.pairfig img{width:100%;height:auto;border-radius:6px;background:#fff}
+@media (max-width:760px){
+  .need-group{padding-top:64px}
+  .need-group > h2{font-size:28px}
+  .pairfig .row{grid-template-columns:1fr}
+}
