@@ -32,12 +32,21 @@
 <main class="wrap">
 
   <section class="hero">
-    <p class="eyebrow">Physics-based dynamics</p>
-    <h1>Accurate, differentiable simulation for robots and machines.</h1>
-    <p class="lead">ManifoldsX is a high-fidelity, differentiable physics framework for simulating the dynamics of robots and machines.</p>
-    <p>Calculate motion, joint forces, and actuator loads—and how they change with your design parameters.</p>
-    <p>Have a system you’d like to simulate? Get in touch to discuss your project.</p>
-    <div class="actions"><a class="button" href="examples/">View simulations</a><a href="#pilot">Discuss your project</a></div>
+    <div class="hero-split">
+      <div class="hero-text">
+        <p class="eyebrow">Physics-based dynamics</p>
+        <h1>Accurate, differentiable simulation for robots and machines.</h1>
+        <p class="lead">ManifoldsX is a high-fidelity, differentiable physics framework for simulating the dynamics of robots and machines.</p>
+        <div class="actions"><a class="button" href="examples/">View simulations</a><a href="#pilot">Discuss your project</a></div>
+      </div>
+      <figure class="hero-media">
+        <a class="clip" href="examples/#cotton">
+          <video muted loop playsinline preload="metadata" poster="examples/media/robot_cloth.jpg" aria-label="Two robot arms moving a cotton sheet"><source src="examples/media/robot_cloth.mp4" type="video/mp4"></video>
+        </a>
+        <figcaption><b>Two robot arms handling fabric.</b> Arms and fabric are simulated together, including the forces through the grippers.</figcaption>
+      </figure>
+    </div>
+    <p class="hero-sub">Calculate motion, joint forces, and actuator loads—and how they change with your design parameters.</p>
     <div class="needs">
       <div><h3>Robots and motion systems</h3><p>Simulate robot arms, parallel platforms, and linkages with multiple actuators.</p></div>
       <div><h3>Flexible parts and materials</h3><p>Simulate how beams, soft parts, and fabric deform as they move and interact with their surroundings.</p></div>
@@ -46,12 +55,6 @@
   </section>
 
   <section class="reel" aria-label="Featured simulations">
-    <div class="feature">
-      <a class="clip" href="examples/#cotton">
-        <video muted loop playsinline preload="none" poster="examples/media/robot_cloth.jpg" aria-label="Two robot arms moving a cotton sheet"><source src="examples/media/robot_cloth.mp4" type="video/mp4"></video>
-      </a>
-      <p class="caption"><b>Two robot arms handling fabric</b><br>The arms and fabric are simulated together, including the forces transferred through the grippers.</p>
-    </div>
     <div class="second">
       <a class="clip" href="examples/#granular">
         <video muted loop playsinline preload="none" poster="examples/media/granular_collapse.jpg" aria-label="Granular column collapsing"><source src="examples/media/granular_collapse.mp4" type="video/mp4"></video>
