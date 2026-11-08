@@ -62,7 +62,7 @@
 
   <section class="section" id="evidence">
     <h2>Benchmarks and validation</h2>
-    <p>Compare simulation results with analytical solutions. Each benchmark includes the model, solver settings, and reference results.</p>
+    <p>Compare results with exact or high-precision references. Each benchmark includes the model, solver settings, and reference results.</p>
 
     <div class="proof-text">
       <h3>Closed-loop accuracy</h3>
@@ -77,8 +77,10 @@
       <p class="links"><a href="stewart-benchmark/">Benchmark</a><a href="stewart-benchmark/double_stewart_reproduction.zip">Reproduction package (zip, 11&nbsp;MB)</a></p>
     </div>
 
-    <div class="calib" id="sensitivity"><h3>Differentiable physics</h3><p>Use analytic gradients to calibrate models, optimize designs, and identify the parameters that matter most.</p><p><a href="differentiable-dynamics/">Explore parameter sensitivities</a></p></div>
-    <div class="also tight"><h3>Long-duration accuracy</h3><p>Ten classical dynamics problems simulated for 1,000 seconds each and compared with analytical solutions.</p><a href="papers/">View the validation report</a></div>
+    <div class="calib" id="sensitivity"><h3>Differentiable physics</h3><p>Analytic gradients turn a simulation into a calibration tool. From one 8-second tracker recording, they identify all seven joint stiffnesses of a robot arm. The calibrated model then predicts the tool on a new motion to within 2&nbsp;µm.</p>
+      <figure class="figure"><picture><source media="(max-width: 600px)" srcset="examples/media/robot_stiffness_fit_phone.svg"><img src="examples/media/robot_stiffness_fit.svg" alt="Tool sag below the commanded path during the test: tracker data, the model with catalogue stiffness, and the model with identified stiffness" loading="lazy"></picture><figcaption>The arm sags 1 to 4&nbsp;mm below its commanded path under its own weight and a 3&nbsp;kg tool. With catalogue stiffness the model misses by about 1&nbsp;mm; with the identified stiffness it follows the tracker data. Simulated data with 20&nbsp;µm tracker noise.</figcaption></figure>
+      <p><a href="differentiable-dynamics/">Explore parameter sensitivities</a></p></div>
+    <div class="also tight"><h3>Long-duration accuracy</h3><p>Ten classical dynamics problems simulated for 1,000 seconds each and checked against exact or high-precision references.</p><a href="papers/">View the validation report</a></div>
   </section>
 
   <section class="section" id="workflow"><h2>Build, simulate, analyze.</h2><div class="steps">
@@ -87,7 +89,7 @@
 <div><span class="when">3</span><h3>Analyze</h3><p>Explore motion, forces, and parameter sensitivities.</p></div>
 </div></section>
 
-  <section class="section pilot" id="pilot"><p class="eyebrow">Research collaborations</p><h2>Have a project in mind?</h2><p>Research collaborations and pilot studies are welcome. Tell us about your application and what you’d like to investigate.</p><div class="actions"><a class="button" href="mailto:manifoldsx.eng@gmail.com?subject=Research%20collaboration">Get in touch</a><a class="email" href="mailto:manifoldsx.eng@gmail.com">manifoldsx.eng@gmail.com</a></div></section>
+  <section class="section pilot" id="pilot"><p class="eyebrow">Research collaborations</p><h2>Have a project in mind?</h2><p>Research collaborations and pilot studies are welcome. Send a short description of your mechanism and the question you need answered. You’ll get a written note on whether ManifoldsX fits and what a pilot study would involve.</p><div class="actions"><a class="button" href="mailto:manifoldsx.eng@gmail.com?subject=Research%20collaboration&amp;body=Mechanism%3A%0D%0AQuestion%20you%20need%20answered%3A%0D%0AData%20you%20have%20(CAD%2C%20measurements)%3A%0D%0A">Get in touch</a><a class="email" href="mailto:manifoldsx.eng@gmail.com">manifoldsx.eng@gmail.com</a></div></section>
 
   <p class="more-sims"><a href="examples/">More simulations in the gallery</a></p>
 
