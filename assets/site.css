@@ -185,3 +185,40 @@ table.data tr.own td:first-child{font-weight:600}
 .reel .lead-msg p{font-size:19px;color:var(--muted)}
 .clip span.msg{font-family:var(--serif);font-size:17px;color:var(--muted);margin-top:10px}
 .clip span.msg b{display:block;font-size:20px;color:var(--ink);font-weight:600;margin-bottom:2px}
+
+/* ---------- Home: product page ---------- */
+.eyebrow{font-family:var(--sans);font-size:14px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin-bottom:10px}
+.hero .lead{max-width:62ch}
+.hero .actions a:not(.button){font-family:var(--sans)}
+.needs{display:grid;grid-template-columns:repeat(3,1fr);gap:28px;margin-top:44px}
+.needs > div{border-top:2px solid var(--ink);padding-top:12px}
+.needs h3{font-size:19px}
+.needs p{font-size:16px;line-height:1.55;color:var(--muted);margin-top:6px}
+.reel .caption{font-family:var(--sans);font-size:15px;line-height:1.55;color:var(--muted);margin-top:10px;max-width:var(--measure)}
+.reel .caption b{color:var(--ink);font-weight:500}
+.proof{display:grid;grid-template-columns:1.1fr 1fr;gap:32px;align-items:start;margin-top:32px}
+.proof h3{font-size:22px}
+.facts{display:grid;grid-template-columns:auto 1fr;gap:6px 18px;margin-top:12px;font-family:var(--sans);font-size:15px;line-height:1.5}
+.facts dt{color:var(--muted)}
+.facts dd{color:var(--ink)}
+.proof .links{margin-top:16px;font-size:15px}
+.sens{margin-top:64px;border-top:1px solid var(--rule);padding-top:40px}
+.sens h3{font-size:22px}
+.sens > p{margin-top:8px;color:var(--muted);font-size:18px}
+.sens-ctrl{display:flex;align-items:center;gap:16px;flex-wrap:wrap;margin:22px 0 14px;font-family:var(--sans);font-size:15px}
+.sens-ctrl input[type=range]{width:min(360px,100%);accent-color:var(--accent)}
+.sens-ctrl output{font-variant-numeric:tabular-nums;color:var(--ink);font-weight:500;min-width:13ch}
+.sens .chart{margin-top:6px}
+#senschart .scroll svg{min-width:0}
+.readout{font-family:var(--sans);font-size:16px;color:var(--ink);margin-top:10px}
+.sens .small{margin-top:10px;max-width:var(--measure)}
+.also{margin-top:48px;font-family:var(--sans);font-size:16px;color:var(--muted)}
+.steps .when{text-transform:none}
+.pilot .actions{margin-top:32px}
+.pilot .email{font-family:var(--sans);font-size:16px}
+.more-sims{margin-top:56px;font-family:var(--sans);font-size:16px}
+@media (max-width:760px){
+  .needs,.proof{grid-template-columns:1fr;gap:20px}
+  .needs{margin-top:32px}
+  .sens{margin-top:48px}
+}
