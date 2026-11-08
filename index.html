@@ -35,7 +35,7 @@
   <section class="hero">
     <p class="eyebrow">Multibody simulation</p>
     <h1>Accurate, differentiable simulation for robots and machines.</h1>
-    <p class="lead">ManifoldsX is a multibody solver for engineers who design robots, parallel platforms and machines with flexible parts. It computes the motion, the loads in every joint and actuator, and how both change with your design parameters. Today it is offered through simulation pilots: bring one mechanism and one question, and get a report you can check.</p>
+    <p class="lead">A multibody solver for engineers who design robots, parallel platforms and machines with flexible parts. It computes motion and loads, and how both change with your design parameters. Available today through simulation pilots.</p>
     <div class="actions">
       <a class="button" href="mailto:manifoldsx.eng@gmail.com?subject=Simulation%20pilot&amp;body=Mechanism%3A%0D%0A%0D%0AThe%20question%20you%20need%20answered%3A%0D%0A%0D%0AWhat%20you%20have%20(CAD%2C%20masses%2C%20motion%20or%20test%20data)%3A%0D%0A%0D%0ATimeline%3A%0D%0A">Discuss a simulation pilot</a>
       <a href="#pilot">How a pilot works</a>
@@ -52,7 +52,7 @@
       <a class="clip" href="examples/#cotton">
         <video muted loop playsinline preload="none" poster="examples/media/robot_cloth.jpg" aria-label="Two robot arms moving a cotton sheet"><source src="examples/media/robot_cloth.mp4" type="video/mp4"></video>
       </a>
-      <p class="caption"><b>The question:</b> when two arms move a cotton sheet, how does the sheet lag, fold and ripple? Arms and cloth are one model, so the grippers carry the sheet&rsquo;s real load. Rendered from the solver output.</p>
+      <p class="caption"><b>The question:</b> when two arms move a cotton sheet, how does the sheet lag, fold and ripple? Arms and cloth are solved as one model, so the sheet&rsquo;s weight and drag act on the grippers and arm joints. Rendered from the solver output.</p>
     </div>
     <div class="second">
       <a class="clip" href="examples/#granular">
@@ -71,14 +71,21 @@
       <dl class="facts">
         <dt>Model</dt><dd>Two stacked Stewart platforms, 12 driven legs, 18&nbsp;s</dd>
         <dt>Reference</dt><dd>Exact forward kinematics from the leg lengths</dd>
-        <dt>Result</dt><dd>Both platforms within one nanometre (10<sup>&minus;9</sup>&nbsp;m) of the exact pose</dd>
-        <dt>Speed</dt><dd>About 13&times; real time on one CPU core</dd>
+        <dt>Result</dt><dd>Both platforms within 10<sup>&minus;9</sup>&nbsp;m in position and 2&times;10<sup>&minus;9</sup>&nbsp;rad in orientation of the exact pose</dd>
+        <dt>Speed</dt><dd>About 12&times; real time on one core of a 2.1&nbsp;GHz Intel Xeon</dd>
         <dt>Settings</dt><dd>HHT index-3, error control at 10<sup>&minus;5</sup>, steps up to 3&nbsp;ms</dd>
       </dl>
       <p class="links"><a href="stewart-benchmark/">Benchmark</a><a href="stewart-benchmark/double_stewart_reproduction.zip">Reproduction package (zip, 11&nbsp;MB)</a></p>
     </div>
 
-    <p class="also">Parameter sensitivities: derivatives of the motion and loads with respect to model parameters, computed analytically in the same run and checked against finite differences. <a href="differentiable-dynamics/">How they are computed and checked</a>.</p>
+    <div class="calib" id="sensitivity">
+      <h3>Calibrate a model from measured motion</h3>
+      <p>A pendulum hangs from a sliding block on a spring of unknown stiffness. We start from a guess 13&nbsp;% too low. Each run returns the pendulum tip&rsquo;s path and its derivative with respect to stiffness, computed analytically in the same run, and that derivative gives the next estimate. After three runs the model matches the measured path to the noise level, and the stiffness comes back as 226&nbsp;N/m, within 2&times;10<sup>&minus;5</sup>&nbsp;N/m of the true value.</p>
+      <figure class="figure">
+        <img src="examples/media/calibration.svg" alt="Model minus measured tip position over 6 seconds for three runs: about 21 mm misfit, then 2.6 mm, then 0.48 mm, the noise level">
+        <figcaption>The &ldquo;measured&rdquo; path is a simulation at 226&nbsp;N/m with 0.5&nbsp;mm of random noise added, so the true answer is known. One Gauss&ndash;Newton step per run. <a href="differentiable-dynamics/">How the derivatives are computed and checked</a>.</figcaption>
+      </figure>
+    </div>
     <p class="also tight">Long-run accuracy: ten classical problems, each run for 1,000 seconds against an exact answer. <a href="papers/">Read the paper</a>.</p>
   </section>
 

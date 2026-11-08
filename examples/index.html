@@ -56,7 +56,7 @@
     </figure>
     <div class="notes">
       <div><h3>The question</h3><p>How closely does the upper platform follow the pose set by the twelve leg lengths?</p></div>
-      <div><h3>The answer</h3><p>Both platforms stay within one nanometre of the exact pose from forward kinematics, at about 13&times; real time on one CPU core.</p></div>
+      <div><h3>The answer</h3><p>Both platforms stay within 10<sup>&minus;9</sup>&nbsp;m in position and 2&times;10<sup>&minus;9</sup>&nbsp;rad in orientation of the exact pose from forward kinematics, at about 12&times; real time on one core of a 2.1&nbsp;GHz Intel Xeon.</p></div>
     </div>
     <div class="links"><a href="../stewart-benchmark/">Read the benchmark</a><a href="../stewart-benchmark/double_stewart_reproduction.zip">Reproduction package (zip, 11&nbsp;MB)</a></div>
   </article>
@@ -94,7 +94,7 @@
     <p class="lead">Machines that carry or contain soft parts and loose materials: fabric, flexible links, grains.</p>
   <article class="case" id="cotton">
     <h3 class="case-title">Cotton sheet held by two robot arms</h3>
-    <p>Two 7-joint arms hold an A3 cotton sheet by its top corners and move it around. Arms and cloth are one model, so the grippers carry the cloth's real load.</p>
+    <p>Two 7-joint arms hold an A3 cotton sheet by its top corners and move it around. Arms and cloth are solved as one model, so the sheet's weight and drag act on the grippers and arm joints.</p>
     <figure>
       <video controls muted playsinline preload="metadata" poster="media/robot_cloth.jpg" aria-label="Two robot arms moving a cotton sheet"><source src="media/robot_cloth.mp4" type="video/mp4"></video>
       <figcaption>Rendered from the solver output. Arm models from MuJoCo Menagerie; cloth motion from recordings by Coltraro et al. (2025).</figcaption>
