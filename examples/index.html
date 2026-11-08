@@ -4,13 +4,13 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Simulation gallery – ManifoldsX</title>
-<meta name="description" content="Mechanisms simulated with ManifoldsX: Stewart platforms, a 100-link chain, a gyroscope, a spinning top, a tumbling body, a cotton sheet, a soft robot link and a mini excavator.">
+<meta name="description" content="Mechanisms simulated with ManifoldsX: Stewart platforms, a 100-link chain, a gyroscope, a spinning top, a tumbling body, robot arms holding a cotton sheet, a soft robot link and a mini excavator.">
 <meta name="author" content="Yosi BZ">
 <link rel="canonical" href="https://manifoldsx.github.io/examples/">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="ManifoldsX">
 <meta property="og:title" content="Simulation gallery – ManifoldsX">
-<meta property="og:description" content="Mechanisms simulated with ManifoldsX: Stewart platforms, a 100-link chain, a gyroscope, a spinning top, a tumbling body, a cotton sheet, a soft robot link and a mini excavator.">
+<meta property="og:description" content="Mechanisms simulated with ManifoldsX: Stewart platforms, a 100-link chain, a gyroscope, a spinning top, a tumbling body, robot arms holding a cotton sheet, a soft robot link and a mini excavator.">
 <meta property="og:url" content="https://manifoldsx.github.io/examples/">
 <meta name="twitter:card" content="summary">
 <link rel="preload" href="../assets/fonts/source-serif-4.woff2" as="font" type="font/woff2" crossorigin>
@@ -122,15 +122,15 @@
 
 
   <article class="case" id="cotton">
-    <h2>Cotton sheet</h2>
-    <p>An A3 sheet of cotton hangs from two corners, which shake it and then twist it. The sheet is a grid of 117 small patches joined by flexible connections, with air drag and the mass of the air it pushes.</p>
+    <h2>Cotton sheet held by two robot arms</h2>
+    <p>Two 7-joint arms hold an A3 cotton sheet by its top corners and move it the way a person did in a motion-capture recording. Arms and cloth are one model, so the grippers carry the cloth's real load.</p>
     <figure>
-      <video controls muted playsinline preload="metadata" poster="media/cotton_sheet.jpg" aria-label="Cotton sheet shaken and twisted from two corners"><source src="media/cotton_sheet.mp4" type="video/mp4"></video>
-      <figcaption>Real time. The corner motion is made up for this clip.</figcaption>
+      <video controls muted playsinline preload="metadata" poster="media/robot_cloth.jpg" aria-label="Two robot arms moving a cotton sheet"><source src="media/robot_cloth.mp4" type="video/mp4"></video>
+      <figcaption>Rendered from the solver output. Arm models from MuJoCo Menagerie; cloth motion from the recordings of Coltraro et al. (2025).</figcaption>
     </figure>
     <div class="notes">
-      <div><h3>The question</h3><p>Can a simple patch model move like real fabric, including the way air slows it down?</p></div>
-      <div><h3>How it is checked</h3><p>Bending stiffness, air drag and added mass were fitted to motion-capture recordings of a real A3 cotton sheet. On recordings not used for fitting, the model stays within about 10 mm of the measured markers.</p></div>
+      <div><h3>The question</h3><p>Can a simple patch model move like real fabric, including the way air slows it, while robot arms carry it?</p></div>
+      <div><h3>How it is checked</h3><p>Bending stiffness, air drag and added mass were fitted to motion-capture recordings of a real cotton sheet. With the arms holding it, the cloth stays within 9 to 13 mm of the measured markers, and the grippers follow their path to about half a millimetre.</p></div>
     </div>
   </article>
 
