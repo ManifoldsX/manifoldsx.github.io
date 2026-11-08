@@ -264,3 +264,8 @@ table.data tr.own td:first-child{font-weight:600}
   .apps{columns:1}
 }
 @media (max-width:760px){.site-header .wrap{row-gap:8px}}
+.calib{margin-top:56px;border-top:1px solid var(--rule);padding-top:36px}
+.calib h3{font-size:22px}
+.calib > p{margin-top:8px;color:var(--muted);font-size:18px}
+.calib .figure{margin-top:20px}
+.calib .figure img{width:100%;height:auto;background:#fff;border-radius:6px;padding:10px 8px}
