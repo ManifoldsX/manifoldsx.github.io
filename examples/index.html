@@ -4,13 +4,13 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Simulation gallery – ManifoldsX</title>
-<meta name="description" content="Mechanisms simulated with ManifoldsX: Stewart platforms, a 100-link chain, a gyroscope, a spinning top, a tumbling body, a Newton's cradle, a deploying solar panel and a mini excavator.">
+<meta name="description" content="Mechanisms simulated with ManifoldsX: Stewart platforms, a 100-link chain, a gyroscope, a spinning top, a tumbling body, a cotton sheet, a soft robot link and a mini excavator.">
 <meta name="author" content="Yosi BZ">
 <link rel="canonical" href="https://manifoldsx.github.io/examples/">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="ManifoldsX">
 <meta property="og:title" content="Simulation gallery – ManifoldsX">
-<meta property="og:description" content="Mechanisms simulated with ManifoldsX: Stewart platforms, a 100-link chain, a gyroscope, a spinning top, a tumbling body, a Newton's cradle, a deploying solar panel and a mini excavator.">
+<meta property="og:description" content="Mechanisms simulated with ManifoldsX: Stewart platforms, a 100-link chain, a gyroscope, a spinning top, a tumbling body, a cotton sheet, a soft robot link and a mini excavator.">
 <meta property="og:url" content="https://manifoldsx.github.io/examples/">
 <meta name="twitter:card" content="summary">
 <link rel="preload" href="../assets/fonts/source-serif-4.woff2" as="font" type="font/woff2" crossorigin>
@@ -119,29 +119,31 @@
     <div class="links"><a href="../papers/rotational-dynamics/">Read the study</a></div>
   </article>
 
-  <article class="case" id="cradle">
-    <h2>Newton's cradle</h2>
-    <p>Five steel balls, 40 mm across, on hinged strings. One, two, then three balls are pulled back and released.</p>
+
+
+  <article class="case" id="cotton">
+    <h2>Cotton sheet</h2>
+    <p>An A3 sheet of cotton hangs from two corners, which shake it and then twist it. The sheet is a grid of 117 small patches joined by flexible connections, with air drag and the mass of the air it pushes.</p>
     <figure>
-      <video controls muted playsinline preload="metadata" poster="media/newtons_cradle.jpg" aria-label="Newton's cradle simulation"><source src="media/newtons_cradle.mp4" type="video/mp4"></video>
-      <figcaption>Three releases, 4 seconds each, real time.</figcaption>
+      <video controls muted playsinline preload="metadata" poster="media/cotton_sheet.jpg" aria-label="Cotton sheet shaken and twisted from two corners"><source src="media/cotton_sheet.mp4" type="video/mp4"></video>
+      <figcaption>Real time. The corner motion is made up for this clip.</figcaption>
     </figure>
     <div class="notes">
-      <div><h3>The question</h3><p>Does the impulse travel cleanly through the row, so the same number of balls leaves the far end?</p></div>
-      <div><h3>How it is checked</h3><p>Contacts are modelled as compliant impacts. The energy lost in them must only ever grow, never come back, and it does.</p></div>
+      <div><h3>The question</h3><p>Can a simple patch model move like real fabric, including the way air slows it down?</p></div>
+      <div><h3>How it is checked</h3><p>Bending stiffness, air drag and added mass were fitted to motion-capture recordings of a real A3 cotton sheet. On recordings not used for fitting, the model stays within about 10 mm of the measured markers.</p></div>
     </div>
   </article>
 
-  <article class="case" id="solar-panel">
-    <h2>Solar panel deployment</h2>
-    <p>A thin aluminium panel, 1.0 by 0.6 m and 4 mm thick, swings 90 degrees on a driven hinge in 0.8 seconds and latches. A 1 kg sensor sits on one corner.</p>
+  <article class="case" id="soft-link">
+    <h2>Soft robot link</h2>
+    <p>A 400 mm link of soft material, 40 mm square, is swung back and forth by a driven hinge. It is a flexible solid of 216 hex elements, joined to a rigid hub.</p>
     <figure>
-      <video controls muted playsinline preload="metadata" poster="media/solar_panel.jpg" aria-label="Solar panel deployment simulation"><source src="media/solar_panel.mp4" type="video/mp4"></video>
-      <figcaption>Half speed. Colour shows how far the panel bends, up to 80 mm.</figcaption>
+      <video controls muted playsinline preload="metadata" poster="media/soft_link.jpg" aria-label="Soft link swung by a driven hinge"><source src="media/soft_link.mp4" type="video/mp4"></video>
+      <figcaption>Half speed. Colour shows how far the link bends away from its rigid position, up to 28 mm; the thin outline marks where a rigid link would be.</figcaption>
     </figure>
     <div class="notes">
-      <div><h3>The question</h3><p>How far does a thin panel bend when it latches at speed, and how long does it keep flapping?</p></div>
-      <div><h3>How it is checked</h3><p>The panel is a flexible solid (240 elements) joined to a rigid hinge. The hinge lands at exactly 90 degrees, and the same elements match the exact large-deflection beam solution to within 0.2%.</p></div>
+      <div><h3>The question</h3><p>How much does a flexible link lag and bend when its joint is driven hard?</p></div>
+      <div><h3>How it is checked</h3><p>The same hex elements match the exact large-deflection beam solution to within 0.2%. Joint constraints between the solid and the hub hold to round-off level.</p></div>
     </div>
   </article>
 
